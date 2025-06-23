@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paul Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Section */
+        .header-section {
+            margin-bottom: 60px;
+        }
+
+        .intro-text {
+            max-width: 400px;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #666;
+            font-weight: 300;
+        }
+
+        .intro-text .name {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .intro-text .portfolio-link {
+            display: block;
+            margin-top: 20px;
+            color: #666;
+            text-decoration: underline;
+            font-size: 13px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            background: #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 16px;
+            position: relative;
+        }
+
+        .image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .text-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none;
+        }
+
+        .strada-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 48px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 700;
+            line-height: 0.8;
+            text-align: center;
+            transform: rotate(-8deg);
+        }
+
+        .strada-line {
+            display: block;
+            margin: 5px 0;
+            opacity: 0.8;
+        }
+
+        .strada-line:nth-child(2) { transform: translateX(20px); }
+        .strada-line:nth-child(3) { transform: translateX(-15px); }
+        .strada-line:nth-child(4) { transform: translateX(10px); }
+        .strada-line:nth-child(5) { transform: translateX(-25px); }
+        .strada-line:nth-child(6) { transform: translateX(15px); }
+        .strada-line:nth-child(7) { transform: translateX(-10px); }
+        .strada-line:nth-child(8) { transform: translateX(5px); }
+
+        /* Gallery Navigation */
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            color: #333;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-nav:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .prev { left: 15px; }
+        .next { right: 15px; }
+
+        .gallery-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .dot.active {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid #e0e0e0;
+            margin-top: auto;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            color: #666;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item:hover {
+            color: #333;
+        }
+
+        .copyright {
+            font-size: 12px;
+            color: #999;
+            margin-top: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .intro-text {
+                font-size: 13px;
+                max-width: 100%;
+            }
+
+            .image-container {
+                height: 300px;
+                max-width: 100%;
+            }
+
+            .strada-text {
+                font-size: 36px;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .header-section {
+                margin-bottom: 40px;
+            }
+
+            .main-content {
+                margin-bottom: 40px;
+            }
+        }
+
+        /* Animation pour le carrousel */
+        .image-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .gallery-slide.active {
+            opacity: 1;
+        }
+
+        .gallery-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header-section">
+            <div class="intro-text">
+                <span class="name">Paul</span> is a freelance graphic designer.<br>
+                He aims to think, create and produce visuals and narrative<br>
+                experiences with a minimalist and technical approach.<br><br>
+                <a href="#" class="portfolio-link">Reach out for commercial portfolio.</a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="image-container">
+                <!-- Slide 1 -->
+                <div class="gallery-slide active">
+                    <div class="image-placeholder">
+                        <span>Remplacez par votre première image</span>
+                    </div>
+                    <div class="text-overlay">
+                        <div class="strada-text">
+                            <span class="strada-line">Strada</span>
+                            <span class="strada-line">Strada</span>
+                            <span class="strada-line">Strada</span>
+                            <span class="strada-line">Strada</span>
+                            <span class="strada-line">Strada</span>
+                            <span class="strada-line">Strada</span>
+                            <span class="strada-line">Strada</span>
+                            <span class="strada-line">Strada</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="gallery-slide">
+                    <div class="image-placeholder">
+                        <span>Remplacez par votre deuxième image</span>
+                    </div>
+                    <div class="text-overlay">
+                        <div class="strada-text">
+                            <span class="strada-line">Strada</span>
+                            <span class="strada-line">Strada</span>
+                            <span class="strada-line">Strada</span>
+                            <span class="strada-line">Strada</span>
+                            <span class="strada-line">Strada</span>
+                            <span class="strada-line">Strada</span>
+                            <span class="strada-line">Strada</span>
+                            <span class="strada-line">Strada</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="gallery-slide">
+                    <div class="image-placeholder">
+                        <span>Remplacez par votre troisième image</span>
+                    </div>
+                    <div class="text-overlay">
+                        <div class="strada-text">
+                            <span class="strada-line">Strada</span>
+                            <span class="strada-line">Strada</span>
+                            <span class="strada-line">Strada</span>
+                            <span class="strada-line">Strada</span>
+                            <span class="strada-line">Strada</span>
+                            <span class="strada-line">Strada</span>
+                            <span class="strada-line">Strada</span>
+                            <span class="strada-line">Strada</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <button class="gallery-nav prev" onclick="changeSlide(-1)">‹</button>
+                <button class="gallery-nav next" onclick="changeSlide(1)">›</button>
+
+                <!-- Dots -->
+                <div class="gallery-dots">
+                    <span class="dot active" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="contact-info">
+                <a href="mailto:bonjour@333paul.com" class="contact-item">bonjour@333paul.com</a>
+                <a href="https://instagram.com/333paul" class="contact-item" target="_blank">Instagram</a>
+                <a href="#" class="contact-item">Are.na</a>
+            </div>
+            <div class="copyright">© 2025, 333Paul</div>
+        </div>
+    </div>
+
+    <script>
+        let slideIndex = 1;
+        showSlide(slideIndex);
+
+        function changeSlide(n) {
+            showSlide(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlide(slideIndex = n);
+        }
+
+        function showSlide(n) {
+            const slides = document.getElementsByClassName('gallery-slide');
+            const dots = document.getElementsByClassName('dot');
+            
+            if (n > slides.length) { slideIndex = 1; }
+            if (n < 1) { slideIndex = slides.length; }
+            
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active');
+            }
+            
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].classList.remove('active');
+            }
+            
+            slides[slideIndex - 1].classList.add('active');
+            dots[slideIndex - 1].classList.add('active');
+        }
+
+        // Auto-slide (optionnel)
+        setInterval(() => {
+            changeSlide(1);
+        }, 5000);
+    </script>
+</body>
+</html>
