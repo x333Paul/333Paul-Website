@@ -70,6 +70,9 @@ Reach out for full portfolio <br>
 <script>
 const video = document.querySelector('.GifVideo');
 
+//  Définir la vitesse de lecture
+video.playbackRate = 1.2; // ← tu peux mettre 2, 0.8, etc.
+
 // Pour desktop
 video.addEventListener('mousedown', () => {
   video.pause();
@@ -93,9 +96,8 @@ document.addEventListener('mouseup', () => {
 document.addEventListener('touchend', () => {
   if (video.paused) video.play();
 });
+</script>
 
-
-  </script>
 
 
 
