@@ -1,0 +1,204 @@
+/* =====================
+   RESET DE BASE
+   ===================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =====================
+   GLOBAL
+   ===================== */
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: #F6F6F6;
+  font-family: "ITC Avant Garde Gothic Std", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* =====================
+   STRUCTURE PRINCIPALE
+   ===================== */
+.Main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  position: relative;
+}
+
+/* =====================
+   CONTENU GAUCHE
+   ===================== */
+.Left {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  font-size: clamp(10px, 0.7vw, 14px);
+  font-weight: 500;
+  line-height: 120%;
+  color: #000;
+  max-width: 300px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  opacity: 0.3;
+  transition: opacity 0.3s cubic-bezier(0.3, 0, 0.45, 1);
+}
+
+/* =====================
+   CONTENEUR GIF
+   ===================== */
+.GifWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Container {
+  width: 580px;
+  height: 580px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.GifVideo {
+  width: 580px;
+  height: 580px;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.3s cubic-bezier(0.3, 0, 0.45, 1);
+}
+
+/* =====================
+   FOOTER
+   ===================== */
+.Footer {
+  text-align: center;
+  font-size: 10px;
+  font-weight: 500;
+  margin: 20px 0;
+  color: #000;
+}
+
+/* =====================
+   TRES GRANDS ECRANS (≥1440px)
+   ===================== */
+@media (min-width: 1440px) {
+  .Left {
+    max-width: 400px;
+  }
+}
+
+/* =====================
+   TABLETTE (≤1024px)
+   ===================== */
+@media (max-width: 1024px) {
+  .Main {
+    padding: 30px 20px;
+  }
+
+  .Container {
+    width: 480px;
+    height: 480px;
+  }
+
+  .GifVideo {
+    width: 480px;
+    height: 480px;
+  }
+
+  .Left {
+    font-size: 12px;
+    max-width: 280px;
+  }
+}
+
+/* =====================
+   PETIT TABLETTE / MOBILE (≤768px)
+   ===================== */
+@media (max-width: 768px) {
+  .Main {
+    flex-direction: column;
+    padding: 20px 15px;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .Left {
+    position: static;
+    top: auto;
+    left: auto;
+    max-width: 100%;
+    padding: 0 10px;
+    font-size: 14px;
+  }
+
+  .Container {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    margin: 0 auto;
+    margin-top: 50px;
+  }
+
+  .GifVideo {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain;
+    margin-top: 50px;
+  }
+
+  .Footer {
+    font-size: 14px;
+    margin: 15px 0;
+  }
+}
+
+/* =====================
+   MOBILE (≤400px)
+   ===================== */
+@media (max-width: 400px) {
+  .Main {
+    padding: 10px;
+    align-items: center;
+  }
+
+  .GifWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .Container {
+    max-width: 300px;
+    margin: 0 auto;
+    margin-top: 20px;
+
+  }
+
+  .GifVideo {
+    max-height: 300px;
+    margin: 0 auto;
+    display: block;
+    margin-top: 20px;
+  }
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon site</title>
+  <link rel="stylesheet" href="2025-06-25_WEBSITE_PAUL-style.css"> <!-- si tu as un fichier CSS -->
+</head>
+
+
+<!--CONTENU-->
+<body>
+<div class="Main">
+
+
+
+<div class="Left">
+<div class="Description">
+
+  Paul is a Freelance graphic designer. He develops visual identities and narrative systems through a minimalist lens and a methodical approach.
+   <br>
+ </div>
+<br>
+ 
+ <div class="Previously">
+
+  Previously at
+   <div class="Link">
+    <a href="https://feldman.studio"target="_blank" rel="noopener noreferrer">· Feldman (designer)</a> <br>
+    <a href="https://www.antinomy.studio/"target="_blank" rel="noopener noreferrer">· Antinomy (intern)</a>
+</div><br>
+</div>
+
+ <div class="Contact">
+
+Reach out for full portfolio <br>
+ <a href="https://www.instagram.com/x333paul/"target="_blank" rel="noopener noreferrer">Instagram</a>,
+ <a href="https://www.are.na/paul/channels"target="_blank" rel="noopener noreferrer">Are.na</a><br>
+ <a href="#" onclick="copyEmail()">bonjour@333paul.com</a>
+
+<script>
+  function copyEmail(element) {
+    const email = 'bonjour@333paul.com';
+    navigator.clipboard.writeText(email)
+      .then(() => {
+        element.textContent = 'E-mail copié !';
+        setTimeout(() => {
+          element.textContent = 'Copier l\'email';
+        }, 2000);
+      });
+  }
+</script>
+</div>
+</div>
+
+
+
+
+<div class="GifWrapper">
+<div class="Container">
+  <video src="file:///Users/paulguibert/Library/Mobile%20Documents/com~apple~CloudDocs/01_PERSONNEL/2025-06-26_PAUL-WEBSITE/DEV/Assets/WEBSITE-GIF.mp4"
+    autoplay
+    loop
+    muted
+    playsinline
+    class="GifVideo"></video>
+</div>
+</div>
+
+<script>
+const video = document.querySelector('.GifVideo');
+
+// Pour desktop
+video.addEventListener('mousedown', () => {
+  video.pause();
+});
+video.addEventListener('mouseup', () => {
+  video.play();
+});
+
+// Pour mobile (touch)
+video.addEventListener('touchstart', () => {
+  video.pause();
+});
+video.addEventListener('touchend', () => {
+  video.play();
+});
+
+// Aussi gérer relâchement en dehors
+document.addEventListener('mouseup', () => {
+  if (video.paused) video.play();
+});
+document.addEventListener('touchend', () => {
+  if (video.paused) video.play();
+});
+
+
+  </script>
+
+
+
+</div>
+
+
+
+
+<div class="Footer">
+©2025, 333Paul
+</div>
+
+</body>
+
+</html>
