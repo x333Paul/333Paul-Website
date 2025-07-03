@@ -1,15 +1,11 @@
-/* =====================
-   RESET DE BASE
-   ===================== */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* =====================
-   GLOBAL
-   ===================== */
+
 html, body {
   height: 100%;
 }
@@ -22,9 +18,7 @@ body {
   justify-content: space-between;
 }
 
-/* =====================
-   STRUCTURE PRINCIPALE
-   ===================== */
+
 .Main {
   flex: 1;
   display: flex;
@@ -34,9 +28,7 @@ body {
   position: relative;
 }
 
-/* =====================
-   CONTENU GAUCHE
-   ===================== */
+
 .Left {
   display: flex;
   flex-direction: column;
@@ -62,9 +54,7 @@ a:hover {
   transition: opacity 0.3s cubic-bezier(0.3, 0, 0.45, 1);
 }
 
-/* =====================
-   CONTENEUR GIF
-   ===================== */
+
 .GifWrapper {
   display: flex;
   align-items: center;
@@ -86,9 +76,7 @@ a:hover {
   transition: opacity 0.3s cubic-bezier(0.3, 0, 0.45, 1);
 }
 
-/* =====================
-   FOOTER
-   ===================== */
+
 .Footer {
   text-align: center;
   font-size: 10px;
@@ -97,18 +85,14 @@ a:hover {
   color: #000;
 }
 
-/* =====================
-   TRES GRANDS ECRANS (≥1440px)
-   ===================== */
+/*≥1440px*/
 @media (min-width: 1440px) {
   .Left {
     max-width: 400px;
   }
 }
 
-/* =====================
-   TABLETTE (≤1024px)
-   ===================== */
+/*≤1024px*/
 @media (max-width: 1024px) {
   .Main {
     padding: 30px 20px;
@@ -130,9 +114,7 @@ a:hover {
   }
 }
 
-/* =====================
-   PETIT TABLETTE / MOBILE (≤768px)
-   ===================== */
+/*≤768px*/
 @media (max-width: 768px) {
   .Main {
     flex-direction: column;
@@ -172,9 +154,7 @@ a:hover {
   }
 }
 
-/* =====================
-   MOBILE (≤400px)
-   ===================== */
+/*≤400px*/
 @media (max-width: 400px) {
   .Main {
     padding: 10px;
