@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>333Paul</title>
-  <link rel="stylesheet" href="style.css"> <!-- si tu as un fichier CSS -->
+  <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="Assets/FAVICON.png">
 </head>
 
 
-<!--CONTENU-->
+
 <body>
 <div class="Main">
 
@@ -71,10 +71,10 @@ Reach out for full portfolio <br>
 <script>
 const video = document.querySelector('.GifVideo');
 
-//  Définir la vitesse de lecture
+//
 video.playbackRate = 1.5; // ← tu peux mettre 2, 0.8, etc.
 
-// Pour desktop
+// Desktop
 video.addEventListener('mousedown', () => {
   video.pause();
 });
@@ -82,7 +82,7 @@ video.addEventListener('mouseup', () => {
   video.play();
 });
 
-// Pour mobile (touch)
+// Mobile
 video.addEventListener('touchstart', () => {
   video.pause();
 });
@@ -90,7 +90,7 @@ video.addEventListener('touchend', () => {
   video.play();
 });
 
-// Aussi gérer relâchement en dehors
+// Out
 document.addEventListener('mouseup', () => {
   if (video.paused) video.play();
 });
