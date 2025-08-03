@@ -5,6 +5,13 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: 'ITC-AvantGarde';
+  src: url('Assets/ITC-AvantGarde.woff2') format('woff2'),
+       url('Assets/ITC-AvantGarde.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 
 html, body {
   height: 100%;
@@ -12,7 +19,7 @@ html, body {
 
 body {
   background-color: #F6F6F6;
-  font-family: "ITC Avant Garde Gothic Std", sans-serif;
+  font-family: "ITC-AvantGarde", sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
