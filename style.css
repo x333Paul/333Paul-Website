@@ -83,6 +83,10 @@ a:hover {
   transition: opacity 0.3s cubic-bezier(0.3, 0, 0.45, 1);
 }
 
+.GifVideo {
+  transition: opacity 0.15s ease;
+}
+
 
 .Footer {
   text-align: center;
