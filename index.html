@@ -100,6 +100,13 @@ Reach out for full portfolio <br>
 const video = document.querySelector('.GifVideo');
 let manualMode = false;
 let frameStep = 1 / 30;
+// Petit coup de pouce pour l'autoplay sur iOS
+setTimeout(() => {
+  video.play().catch(() => {
+    // Si Safari bloque quand même, on ne fait rien
+  });
+}, 500);
+
 
 // --- Détection mobile ---
 const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
