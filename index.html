@@ -93,39 +93,44 @@ Reach out for full portfolio <br>
 </div>
 
 <script>
-  const video = document.querySelector('.GifVideo');
-  let manualMode = false;
+const video = document.querySelector('.GifVideo');
+let manualMode = false;
+let frameStep = 1 / 30; // Valeur par défaut (30fps) ajustée ensuite automatiquement
 
-  // Lecture auto au démarrage
-  video.play();
+// Ajuster le step selon la durée totale et le nombre de frames
+video.addEventListener('loadedmetadata', () => {
+  if (video.duration > 0) {
+    // Estimation empirique : certaines vidéos de "GIF" sont ~1s pour ~30 frames
+    // On ajuste selon la durée totale
+    frameStep = video.duration / 30;
+  }
+});
 
-  // Clic sur la vidéo → toggle mode manuel
-  video.addEventListener('click', (event) => {
-    event.stopPropagation(); // empêche le clic d’être pris par le fond
+// --- Contrôle des modes ---
+video.addEventListener('click', () => {
+  if (!manualMode) {
+    // 1er clic → passe en mode manuel (pause)
+    manualMode = true;
+    video.pause();
+  } else {
+    // Clic suivant → avance d'une frame
+    video.currentTime += frameStep;
 
-    if (!manualMode) {
-      // Passe en mode manuel
-      manualMode = true;
-      video.pause();
-    } else {
-      // En mode manuel → avance d'une frame
-      const fps = 30; // adapte selon ton framerate
-      video.currentTime += 1 / fps;
+    // Si on dépasse la fin, on revient au début
+    if (video.currentTime >= video.duration) {
+      video.currentTime = 0;
     }
+  }
+});
 
-    // petit effet de fondu
-    video.style.transition = 'opacity 0.15s ease';
-    video.style.opacity = 0.8;
-    setTimeout(() => video.style.opacity = 1, 150);
-  });
-
-  // Clic sur le fond → reprend la lecture auto
-  document.body.addEventListener('click', () => {
-    if (manualMode) {
-      manualMode = false;
-      video.play();
-    }
-  });
+// --- Clic sur le fond pour reprendre la lecture ---
+document.body.addEventListener('click', (e) => {
+  const clickedInsideVideo = e.target.classList.contains('GifVideo');
+  if (!clickedInsideVideo && manualMode) {
+    manualMode = false;
+    video.play();
+  }
+});
 </script>
 
 
