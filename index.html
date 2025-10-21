@@ -93,36 +93,40 @@ Reach out for full portfolio <br>
 </div>
 
 <script>
-const video = document.querySelector('.GifVideo');
+  const video = document.querySelector('.GifVideo');
+  let manualMode = false;
 
-//
-video.playbackRate = 1.5; // ← tu peux mettre 2, 0.8, etc.
-
-// Desktop
-video.addEventListener('mousedown', () => {
-  video.pause();
-});
-video.addEventListener('mouseup', () => {
+  // Lecture auto au démarrage
   video.play();
-});
 
-// Mobile
-video.addEventListener('touchstart', () => {
-  video.pause();
-});
-video.addEventListener('touchend', () => {
-  video.play();
-});
+  // Clic sur la vidéo → toggle mode manuel
+  video.addEventListener('click', (event) => {
+    event.stopPropagation(); // empêche le clic d’être pris par le fond
 
-// Out
-document.addEventListener('mouseup', () => {
-  if (video.paused) video.play();
-});
-document.addEventListener('touchend', () => {
-  if (video.paused) video.play();
-});
+    if (!manualMode) {
+      // Passe en mode manuel
+      manualMode = true;
+      video.pause();
+    } else {
+      // En mode manuel → avance d'une frame
+      const fps = 30; // adapte selon ton framerate
+      video.currentTime += 1 / fps;
+    }
+
+    // petit effet de fondu
+    video.style.transition = 'opacity 0.15s ease';
+    video.style.opacity = 0.8;
+    setTimeout(() => video.style.opacity = 1, 150);
+  });
+
+  // Clic sur le fond → reprend la lecture auto
+  document.body.addEventListener('click', () => {
+    if (manualMode) {
+      manualMode = false;
+      video.play();
+    }
+  });
 </script>
-
 
 
 
