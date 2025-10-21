@@ -106,6 +106,12 @@ setTimeout(() => {
     // Si Safari bloque quand même, on ne fait rien
   });
 }, 500);
+document.body.addEventListener('touchstart', () => {
+  if (video.paused) {
+    video.play().catch(() => {});
+  }
+}, { once: true });
+
 
 
 // --- Détection mobile ---
