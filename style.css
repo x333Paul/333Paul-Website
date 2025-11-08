@@ -250,3 +250,59 @@ body[data-mode="manual"] .cursor {
   .cursor { display: none; }
 }
 
+/* --- Slideshow --- */
+#slideshow {
+  position: relative;
+  width: 580px;
+  height: 580px;
+  overflow: hidden;
+}
+
+#slideshow img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+#slideshow img.active {
+  opacity: 1;
+}
+
+/* --- Nom du projet --- */
+#project-name {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  font-weight: 500;
+  color: #000;
+  text-align: center;
+}
+
+/* --- Curseur personnalisé --- */
+#customCursor {
+  position: fixed;
+  pointer-events: none;
+  font-size: 18px;
+  font-weight: 600;
+  color: #000;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: transform 0.1s ease;
+}
+
+/* Désactivation du curseur custom sur mobile */
+@media (max-width: 768px) {
+  #customCursor {
+    display: none;
+  }
+}
+
+
