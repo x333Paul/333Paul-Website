@@ -34,77 +34,6 @@
 
 
 
-
-<script>
-const slideshow = document.getElementById('slideshow');
-const images = slideshow.querySelectorAll('img');
-const projectName = document.getElementById('project-name');
-const cursor = document.getElementById('customCursor');
-let current = 0;
-let autoPlay = true;
-let interval;
-
-// --- Affiche l’image courante ---
-function showImage(index) {
-  images.forEach((img, i) => img.classList.toggle('active', i === index));
-  const url = images[index].dataset.url;
-  const name = images[index].alt;
-  history.replaceState(null, '', '/' + url);
-  projectName.textContent = name;
-}
-
-// --- Mode auto ---
-function startAuto() {
-  autoPlay = true;
-  document.body.dataset.mode = 'auto';
-  clearInterval(interval);
-  interval = setInterval(() => {
-    current = (current + 1) % images.length;
-    showImage(current);
-  }, 150); // vitesse du défilement (ms)
-}
-
-// --- Mode manuel ---
-function stopAuto() {
-  autoPlay = false;
-  document.body.dataset.mode = 'manual';
-  clearInterval(interval);
-}
-
-// --- Clic sur la zone d’image ---
-slideshow.addEventListener('click', (e) => {
-  if (window.innerWidth <= 768) return; // désactive sur mobile
-  if (!autoPlay) {
-    current = (current + 1) % images.length;
-    showImage(current);
-  } else {
-    stopAuto();
-  }
-});
-
-// --- Clic dans le blanc pour reprendre ---
-document.body.addEventListener('click', (e) => {
-  if (autoPlay || window.innerWidth <= 768) return;
-  if (!slideshow.contains(e.target)) startAuto();
-});
-
-// --- Curseur personnalisé ---
-window.addEventListener('mousemove', (e) => {
-  cursor.style.left = e.clientX + 'px';
-  cursor.style.top = e.clientY + 'px';
-  if (document.body.dataset.mode === 'manual') {
-    if (e.clientX < window.innerWidth / 3) cursor.textContent = '‹';
-    else if (e.clientX > (2 * window.innerWidth) / 3) cursor.textContent = '›';
-    else cursor.textContent = '×';
-  }
-});
-
-// --- Initialisation ---
-showImage(current);
-startAuto();
-</script>
-
-
   
 
 
@@ -179,6 +108,79 @@ Reach out for full portfolio <br>
 © 2025, 333Paul
 </div>
 
+
+<script>
+const slideshow = document.getElementById('slideshow');
+const images = slideshow.querySelectorAll('img');
+const projectName = document.getElementById('project-name');
+const cursor = document.getElementById('customCursor');
+let current = 0;
+let autoPlay = true;
+let interval;
+
+// --- Affiche l’image courante ---
+function showImage(index) {
+  images.forEach((img, i) => img.classList.toggle('active', i === index));
+  const url = images[index].dataset.url;
+  const name = images[index].alt;
+  history.replaceState(null, '', '/' + url);
+  projectName.textContent = name;
+}
+
+// --- Mode auto ---
+function startAuto() {
+  autoPlay = true;
+  document.body.dataset.mode = 'auto';
+  clearInterval(interval);
+  interval = setInterval(() => {
+    current = (current + 1) % images.length;
+    showImage(current);
+  }, 150); // vitesse du défilement (ms)
+}
+
+// --- Mode manuel ---
+function stopAuto() {
+  autoPlay = false;
+  document.body.dataset.mode = 'manual';
+  clearInterval(interval);
+}
+
+// --- Clic sur la zone d’image ---
+slideshow.addEventListener('click', (e) => {
+  if (window.innerWidth <= 768) return; // désactive sur mobile
+  if (!autoPlay) {
+    current = (current + 1) % images.length;
+    showImage(current);
+  } else {
+    stopAuto();
+  }
+});
+
+// --- Clic dans le blanc pour reprendre ---
+document.body.addEventListener('click', (e) => {
+  if (autoPlay || window.innerWidth <= 768) return;
+  if (!slideshow.contains(e.target)) startAuto();
+});
+
+// --- Curseur personnalisé ---
+window.addEventListener('mousemove', (e) => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+  if (document.body.dataset.mode === 'manual') {
+    if (e.clientX < window.innerWidth / 3) cursor.textContent = '‹';
+    else if (e.clientX > (2 * window.innerWidth) / 3) cursor.textContent = '›';
+    else cursor.textContent = '×';
+  }
+});
+
+// --- Initialisation ---
+showImage(current);
+startAuto();
+</script>
+
+  
+
+  
 </body>
 
 </html>
