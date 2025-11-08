@@ -34,6 +34,81 @@
 
 
 
+
+<script>
+const slideshow = document.getElementById('slideshow');
+const images = slideshow.querySelectorAll('img');
+const projectName = document.getElementById('project-name');
+const cursor = document.getElementById('customCursor');
+let current = 0;
+let autoPlay = true;
+let interval;
+
+// --- Affiche l’image courante ---
+function showImage(index) {
+  images.forEach((img, i) => img.classList.toggle('active', i === index));
+  const url = images[index].dataset.url;
+  const name = images[index].alt;
+  history.replaceState(null, '', '/' + url);
+  projectName.textContent = name;
+}
+
+// --- Mode auto ---
+function startAuto() {
+  autoPlay = true;
+  document.body.dataset.mode = 'auto';
+  clearInterval(interval);
+  interval = setInterval(() => {
+    current = (current + 1) % images.length;
+    showImage(current);
+  }, 150); // vitesse du défilement (ms)
+}
+
+// --- Mode manuel ---
+function stopAuto() {
+  autoPlay = false;
+  document.body.dataset.mode = 'manual';
+  clearInterval(interval);
+}
+
+// --- Clic sur la zone d’image ---
+slideshow.addEventListener('click', (e) => {
+  if (window.innerWidth <= 768) return; // désactive sur mobile
+  if (!autoPlay) {
+    current = (current + 1) % images.length;
+    showImage(current);
+  } else {
+    stopAuto();
+  }
+});
+
+// --- Clic dans le blanc pour reprendre ---
+document.body.addEventListener('click', (e) => {
+  if (autoPlay || window.innerWidth <= 768) return;
+  if (!slideshow.contains(e.target)) startAuto();
+});
+
+// --- Curseur personnalisé ---
+window.addEventListener('mousemove', (e) => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+  if (document.body.dataset.mode === 'manual') {
+    if (e.clientX < window.innerWidth / 3) cursor.textContent = '‹';
+    else if (e.clientX > (2 * window.innerWidth) / 3) cursor.textContent = '›';
+    else cursor.textContent = '×';
+  }
+});
+
+// --- Initialisation ---
+showImage(current);
+startAuto();
+</script>
+
+
+  
+
+
+  
 <body>
 <div class="Main">
 
@@ -94,77 +169,6 @@ Reach out for full portfolio <br>
 
 <div id="project-name">Projet 1</div>
 <div class="cursor" id="customCursor">×</div>
-
-
-
-
-<script>
-const video = document.querySelector('.GifVideo');
-let manualMode = false;
-let frameStep = 1 / 30;
-// Petit coup de pouce pour l'autoplay sur iOS
-setTimeout(() => {
-  video.play().catch(() => {
-    // Si Safari bloque quand même, on ne fait rien
-  });
-}, 500);
-document.body.addEventListener('touchstart', () => {
-  if (video.paused) {
-    video.play().catch(() => {});
-  }
-}, { once: true });
-
-
-
-// --- Détection mobile ---
-const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
-if (!isMobile) {
-  // ---------- DESKTOP ----------
-  video.addEventListener('loadedmetadata', () => {
-    if (video.duration > 0) {
-      frameStep = video.duration / 30;
-    }
-  });
-
-  // Clic sur la vidéo
-  video.addEventListener('click', () => {
-    if (!manualMode) {
-      manualMode = true;
-      video.pause();
-    } else {
-      video.currentTime += frameStep;
-      if (video.currentTime >= video.duration) {
-        video.currentTime = 0;
-      }
-    }
-  });
-
-  // Clic sur le fond pour relancer
-  document.body.addEventListener('click', (e) => {
-    const clickedInsideVideo = e.target.classList.contains('GifVideo');
-    if (!clickedInsideVideo && manualMode) {
-      manualMode = false;
-      video.play();
-    }
-  });
-} else {
-  // ---------- MOBILE ----------
-  // Comportement d'origine : pause/reprise au toucher
-  video.playbackRate = 1.5;
-
-  video.addEventListener('touchstart', () => {
-    video.pause();
-  });
-
-  video.addEventListener('touchend', () => {
-    video.play();
-  });
-}
-</script>
-
-
-
 
 </div>
 
