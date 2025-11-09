@@ -98,27 +98,16 @@ a:hover {
 
 .FooterContent {
   display: inline-block;
-  line-height: 120%; /* espacement vertical parfait */
   text-align: center;
+  line-height: 1.2; /* définit l'espacement vertical entre les lignes */
 }
 
-#project-name {
-  position: fixed;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 11px;
-  font-weight: 500;
-  color: #000;
-  text-align: center;
-  line-height: 1.2; /* 120% */
-  opacity: 1;
-}
-
+#project-name,
 #copyright {
-  font-weight: 400;
-  opacity: 0.3;
+  display: block;
+  margin: 0; /* retirer tout écart inutile */
 }
+
 
 
 
