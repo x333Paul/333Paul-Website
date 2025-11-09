@@ -115,6 +115,10 @@ const slideshow = document.getElementById('slideshow');
 const images = slideshow.querySelectorAll('img');
 const projectName = document.getElementById('project-name');
 const cursor = document.getElementById('customCursor');
+// --- Si l'URL contient un identifiant de projet ---
+const path = window.location.pathname.replace('/', '');
+const initialIndex = Array.from(images).findIndex(img => img.dataset.url === path);
+if (initialIndex >= 0) current = initialIndex;
 let current = 0;
 let autoPlay = true;
 let interval;
