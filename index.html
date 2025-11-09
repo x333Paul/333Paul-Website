@@ -111,12 +111,10 @@ Reach out for full portfolio <br>
   </div>
 </footer>
 
-
-
 <script>
 const slideshow = document.getElementById('slideshow');
 const images = slideshow.querySelectorAll('img');
-const projectName = document.getElementById('projectName');
+const projectName = document.getElementById('project-name'); // ✅ bon ID
 const cursor = document.getElementById('customCursor');
 
 let current = 0;
@@ -145,7 +143,7 @@ function startAuto() {
   interval = setInterval(() => {
     current = (current + 1) % images.length;
     showImage(current);
-  }, 150); // vitesse du défilement
+  }, 150);
 }
 
 // --- Stoppe le défilement (mode manuel) ---
@@ -157,7 +155,7 @@ function stopAuto() {
 
 // --- Gère le clic sur les images ---
 slideshow.addEventListener('click', (e) => {
-  if (window.innerWidth <= 768) return; // désactive sur mobile
+  if (window.innerWidth <= 768) return;
   if (!autoPlay) {
     current = (current + 1) % images.length;
     showImage(current);
@@ -190,19 +188,6 @@ showImage(current);
 startAuto();
 </script>
 
-<script>
-  const savedPath = sessionStorage.getItem("redirectPath");
-  if (savedPath) {
-    const cleanPath = savedPath.replace("/", "");
-    const targetIndex = Array.from(document.querySelectorAll("#slideshow img"))
-      .findIndex(img => img.dataset.url === cleanPath);
-    if (targetIndex >= 0) {
-      current = targetIndex;
-      showImage(current);
-    }
-    sessionStorage.removeItem("redirectPath");
-  }
-</script>
 
 
   
