@@ -96,7 +96,7 @@ Reach out for full portfolio <br>
   </div>
 </div>
 
-<div id="project-name">Projet 1</div>
+
 <div class="cursor" id="customCursor">×</div>
 
 </div>
@@ -105,7 +105,7 @@ Reach out for full portfolio <br>
 
 
 <div class="Footer">
-<div id="projectName">001</div>
+<div id="projectName"></div>
   <div id="copyright">© 2025, 333Paul</div>
 </div>
 
@@ -177,6 +177,31 @@ window.addEventListener('mousemove', (e) => {
 // --- Initialisation ---
 showImage(current);
 startAuto();
+
+  
+// Sélectionne les éléments du DOM
+const images = document.querySelectorAll('.project img');
+const projectNameElement = document.getElementById('projectName');
+
+// Fonction pour mettre à jour le nom du projet
+function updateProjectName(index) {
+  const img = images[index];
+  const name = img.getAttribute('alt'); // On récupère le nom depuis le alt
+  projectNameElement.textContent = name;
+}
+
+// Exemple : au chargement de la page
+let currentIndex = 0;
+updateProjectName(currentIndex);
+
+// Et à chaque changement d'image :
+function nextImage() {
+  currentIndex = (currentIndex + 1) % images.length;
+  // ici ton code pour afficher l'image suivante…
+  updateProjectName(currentIndex);
+}
+
+
 </script>
 
   
