@@ -104,6 +104,7 @@ a:hover {
 
 #project-name {
   font-weight: 500;
+  transform: translate(-50%, -10%);
   opacity: 1;
 }
 
