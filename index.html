@@ -187,7 +187,20 @@ showImage(current);
 startAuto();
 </script>
 
-  
+<script>
+  const savedPath = sessionStorage.getItem("redirectPath");
+  if (savedPath) {
+    const cleanPath = savedPath.replace("/", "");
+    const targetIndex = Array.from(document.querySelectorAll("#slideshow img"))
+      .findIndex(img => img.dataset.url === cleanPath);
+    if (targetIndex >= 0) {
+      current = targetIndex;
+      showImage(current);
+    }
+    sessionStorage.removeItem("redirectPath");
+  }
+</script>
+
 
   
 </body>
