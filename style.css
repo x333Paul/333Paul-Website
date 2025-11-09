@@ -95,17 +95,10 @@ a:hover {
   color: #000;
   z-index: 1000;
 }
-
-.FooterContent {
-  display: inline-block;
-  text-align: center;
-  line-height: 1.2; /* définit l'espacement vertical entre les lignes */
-}
-
 #project-name,
 #copyright {
   display: block;
-  margin: 0; /* retirer tout écart inutile */
+  margin: 4px; /* retirer tout écart inutile */
 }
 
 
