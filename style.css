@@ -88,17 +88,34 @@ a:hover {
   position: fixed;
   bottom: 24px;
   left: 50%;
+  transform: translateX(-50%);
   text-align: center;
   font-family: "ITC-AvantGarde", system-ui, sans-serif;
   font-size: clamp(10px, 0.7vw, 14px);
   color: #000;
   z-index: 1000;
 }
+
+.FooterContent {
+  display: inline-block; /* permet de gérer l’espacement comme un bloc unique */
+  line-height: 1.2;      /* contrôle l’espace vertical entre les deux éléments */
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
 #project-name,
 #copyright {
-  font-size: clamp(10px, 0.7vw, 14px);
-  line-height:120%;
+  display: block;         /* empile les deux éléments */
+  margin: 0;              /* pas d’espace supplémentaire ajouté par défaut */
+  font-size: inherit;     /* récupère la taille de .Footer */
+  font-weight: 500;       /* ou 400 pour copyright */
 }
+#copyright {
+  font-weight: 400;
+  opacity: 0.3;
+}
+
 
 
 
