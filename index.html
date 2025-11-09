@@ -113,17 +113,19 @@ Reach out for full portfolio <br>
 <script>
 const slideshow = document.getElementById('slideshow');
 const images = slideshow.querySelectorAll('img');
-const projectName = document.getElementById('project-name');
+const projectName = document.getElementById('projectName');
 const cursor = document.getElementById('customCursor');
-// --- Si l'URL contient un identifiant de projet ---
-const path = window.location.pathname.replace('/', '');
-const initialIndex = Array.from(images).findIndex(img => img.dataset.url === path);
-if (initialIndex >= 0) current = initialIndex;
+
 let current = 0;
 let autoPlay = true;
 let interval;
 
-// --- Affiche l’image courante ---
+// --- Récupère l'image correspondante à l'URL si dispo ---
+const path = window.location.pathname.replace('/', '');
+const initialIndex = Array.from(images).findIndex(img => img.dataset.url === path);
+if (initialIndex >= 0) current = initialIndex;
+
+// --- Affiche l’image courante et le nom du projet ---
 function showImage(index) {
   images.forEach((img, i) => img.classList.toggle('active', i === index));
   const url = images[index].dataset.url;
@@ -132,7 +134,7 @@ function showImage(index) {
   projectName.textContent = name;
 }
 
-// --- Mode auto ---
+// --- Démarre le défilement automatique ---
 function startAuto() {
   autoPlay = true;
   document.body.dataset.mode = 'auto';
@@ -140,17 +142,17 @@ function startAuto() {
   interval = setInterval(() => {
     current = (current + 1) % images.length;
     showImage(current);
-  }, 150); // vitesse du défilement (ms)
+  }, 150); // vitesse du défilement
 }
 
-// --- Mode manuel ---
+// --- Stoppe le défilement (mode manuel) ---
 function stopAuto() {
   autoPlay = false;
   document.body.dataset.mode = 'manual';
   clearInterval(interval);
 }
 
-// --- Clic sur la zone d’image ---
+// --- Gère le clic sur les images ---
 slideshow.addEventListener('click', (e) => {
   if (window.innerWidth <= 768) return; // désactive sur mobile
   if (!autoPlay) {
@@ -161,7 +163,7 @@ slideshow.addEventListener('click', (e) => {
   }
 });
 
-// --- Clic dans le blanc pour reprendre ---
+// --- Gère le clic dans le blanc pour relancer ---
 document.body.addEventListener('click', (e) => {
   if (autoPlay || window.innerWidth <= 768) return;
   if (!slideshow.contains(e.target)) startAuto();
@@ -175,37 +177,14 @@ window.addEventListener('mousemove', (e) => {
     if (e.clientX < window.innerWidth / 3) cursor.textContent = '‹';
     else if (e.clientX > (2 * window.innerWidth) / 3) cursor.textContent = '›';
     else cursor.textContent = '×';
+  } else {
+    cursor.textContent = '×';
   }
 });
 
 // --- Initialisation ---
 showImage(current);
 startAuto();
-
-  
-// Sélectionne les éléments du DOM
-const images = document.querySelectorAll('.project img');
-const projectNameElement = document.getElementById('projectName');
-
-// Fonction pour mettre à jour le nom du projet
-function updateProjectName(index) {
-  const img = images[index];
-  const name = img.getAttribute('alt'); // On récupère le nom depuis le alt
-  projectNameElement.textContent = name;
-}
-
-// Exemple : au chargement de la page
-let currentIndex = 0;
-updateProjectName(currentIndex);
-
-// Et à chaque changement d'image :
-function nextImage() {
-  currentIndex = (currentIndex + 1) % images.length;
-  // ici ton code pour afficher l'image suivante…
-  updateProjectName(currentIndex);
-}
-
-
 </script>
 
   
