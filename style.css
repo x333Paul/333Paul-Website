@@ -103,8 +103,15 @@ a:hover {
 }
 
 #project-name {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
   font-weight: 500;
-  transform: translate(-50%, -10%);
+  color: #000;
+  text-align: center;
+  line-height: 1.2; /* 120% */
   opacity: 1;
 }
 
