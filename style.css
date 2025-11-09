@@ -88,7 +88,6 @@ a:hover {
   position: fixed;
   bottom: 24px;
   left: 50%;
-  transform: translateX(-50%);
   text-align: center;
   font-family: "ITC-AvantGarde", system-ui, sans-serif;
   font-size: clamp(10px, 0.7vw, 14px);
@@ -97,8 +96,8 @@ a:hover {
 }
 #project-name,
 #copyright {
-  display: block;
-  margin: 4px; /* retirer tout écart inutile */
+  font-size: clamp(10px, 0.7vw, 14px);
+  line-height:120%;
 }
 
 
