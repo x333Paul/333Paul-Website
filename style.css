@@ -110,6 +110,7 @@ a:hover {
   margin: 0;              /* pas d’espace supplémentaire ajouté par défaut */
   font-size: inherit;     /* récupère la taille de .Footer */
   font-weight: 500;       /* ou 400 pour copyright */
+  transform: translateY(6px);
 }
 #copyright {
   font-weight: 400;
