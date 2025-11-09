@@ -82,6 +82,8 @@ a:hover {
   display: block;
 }
 
+
+
 .Footer {
   position: fixed;
   bottom: 24px;
@@ -92,26 +94,24 @@ a:hover {
   font-size: clamp(10px, 0.7vw, 14px);
   color: #000;
   z-index: 1000;
-  line-height: 120%; /* ton espacement vertical voulu */
 }
 
 .FooterContent {
   display: inline-block;
+  line-height: 120%; /* espacement vertical parfait */
   text-align: center;
-  line-height: 120%; /* s’applique à l’ensemble du bloc */
 }
 
 #project-name {
   font-weight: 500;
   opacity: 1;
-  display: block;
 }
 
 #copyright {
   font-weight: 400;
   opacity: 0.3;
-  display: block;
 }
+
 
 
 }
