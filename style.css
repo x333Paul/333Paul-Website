@@ -84,27 +84,36 @@ a:hover {
 
 .Footer {
   position: fixed;
-  bottom: 24px; /* distance depuis le bas */
+  bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
   font-family: "ITC-AvantGarde", system-ui, sans-serif;
-  font-size: 12px;
+  font-size: clamp(10px, 0.7vw, 14px);
   color: #000;
   line-height: 120%;
   z-index: 1000;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px; /* espace entre nom et copyright */
 }
 
 #projectName {
-  margin-bottom: -10px; /* pile une ligne au-dessus du copyright */
+  position: relative;
+  bottom: 0;
   font-weight: 500;
   opacity: 1;
+  font-size: 0.95em;
 }
 
 #copyright {
   font-weight: 400;
   opacity: 0.3;
+  font-size: 0.9em;
 }
+
 }
 
 /*≥1440px*/
