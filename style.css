@@ -80,11 +80,10 @@ a:hover {
   height: 580px;
   object-fit: cover;
   display: block;
-  transition: opacity 0.3s cubic-bezier(0.3, 0, 0.45, 1);
 }
 
 .GifVideo {
-  transition: opacity 0.15s ease;
+  transition: opacity 0.0s ease;
 }
 
 
@@ -102,7 +101,7 @@ a:hover {
 }
 
 #projectName {
-  margin-bottom: 5px; /* pile une ligne au-dessus du copyright */
+  margin-bottom: 0px; /* pile une ligne au-dessus du copyright */
   font-weight: 500;
   opacity: 1;
 }
