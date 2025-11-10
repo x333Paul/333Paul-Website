@@ -90,7 +90,19 @@
 
 <script>
 const slideshow = document.getElementById('slideshow');
-const images = slideshow.querySelectorAll('img');
+let imagesArray = Array.from(slideshow.querySelectorAll('img'));
+
+// --- Mélange aléatoire des images ---
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+imagesArray = shuffle(imagesArray);
+imagesArray.forEach(img => slideshow.appendChild(img));
+
 const projectName = document.getElementById('project-name');
 const cursor = document.getElementById('customCursor');
 
@@ -98,16 +110,16 @@ let current = 0;
 let autoPlay = true;
 let interval;
 
-// --- Récupère l'image correspondante à l'URL si dispo ---
+// --- Récupère l'image correspondant à l'URL si disponible ---
 const path = window.location.pathname.replace('/', '');
-const initialIndex = Array.from(images).findIndex(img => img.dataset.url === path);
+const initialIndex = imagesArray.findIndex(img => img.dataset.url === path);
 if (initialIndex >= 0) current = initialIndex;
 
 // --- Affiche l’image courante et le nom du projet ---
 function showImage(index) {
-  images.forEach((img, i) => img.classList.toggle('active', i === index));
-  const url = images[index].dataset.url;
-  const name = images[index].alt;
+  imagesArray.forEach((img, i) => img.classList.toggle('active', i === index));
+  const url = imagesArray[index].dataset.url;
+  const name = imagesArray[index].alt;
   history.replaceState(null, '', '/' + url);
   projectName.textContent = name;
 }
@@ -118,7 +130,7 @@ function startAuto() {
   document.body.dataset.mode = 'auto';
   clearInterval(interval);
   interval = setInterval(() => {
-    current = (current + 1) % images.length;
+    current = (current + 1) % imagesArray.length;
     showImage(current);
   }, 150);
 }
@@ -134,7 +146,7 @@ function stopAuto() {
 slideshow.addEventListener('click', (e) => {
   if (window.innerWidth <= 768) return;
   if (!autoPlay) {
-    current = (current + 1) % images.length;
+    current = (current + 1) % imagesArray.length;
     showImage(current);
   } else {
     stopAuto();
@@ -151,7 +163,7 @@ document.body.addEventListener('click', (e) => {
 window.addEventListener('mousemove', (e) => {
   const leftBox = document.querySelector('.Left');
 
-  // Position du SVG
+  // Position du curseur
   cursor.style.left = e.clientX + 'px';
   cursor.style.top = e.clientY + 'px';
 
@@ -186,12 +198,12 @@ window.addEventListener('keydown', (e) => {
   }
 
   if (!autoPlay && e.code === 'ArrowRight') {
-    current = (current + 1) % images.length;
+    current = (current + 1) % imagesArray.length;
     showImage(current);
   }
 
   if (!autoPlay && e.code === 'ArrowLeft') {
-    current = (current - 1 + images.length) % images.length;
+    current = (current - 1 + imagesArray.length) % imagesArray.length;
     showImage(current);
   }
 });
