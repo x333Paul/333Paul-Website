@@ -243,7 +243,23 @@ document.addEventListener("mousemove", (e) => {
 });
 
 
-  
+  const cursor = document.querySelector(".custom-cursor");
+
+  document.addEventListener("mousemove", (e) => {
+    const target = e.target;
+    const cursorStyle = getComputedStyle(target).cursor;
+
+    // Si l'élément a un curseur texte ou pointer, on masque
+    if (cursorStyle === "text" || cursorStyle === "pointer") {
+      cursor.style.opacity = 0;
+    } else {
+      cursor.style.opacity = 1;
+    }
+
+    // On suit le mouvement
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
+  });  
 
   
 </script>
