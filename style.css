@@ -114,7 +114,7 @@ a:hover {
 ============================== */
 #slideshow {
   position: relative;
-  width: 580px;
+  width: 0px;
   height: 580px;
   overflow: hidden;
   cursor: default;
