@@ -169,13 +169,12 @@ window.addEventListener('mousemove', (e) => {
   cursor.style.top = e.clientY + 'px';
 
   if (document.body.dataset.mode === 'manual') {
-    const isOverSlideshow = slideshow.contains(e.target);
+    // On ne veut pas le cursor sur les images, sur le texte ou sur les liens
+    const overInteractive = slideshow.contains(e.target) || 
+                            document.querySelector('.Left').contains(e.target) ||
+                            e.target.closest('a'); // inclut tous les liens
 
-    if (!isOverSlideshow) {
-      cursor.style.opacity = 1; // visible seulement dans le fond
-    } else {
-      cursor.style.opacity = 0; // disparaît sur les images
-    }
+    cursor.style.opacity = overInteractive ? 0 : 1; // visible seulement sur le fond
   } else {
     cursor.style.opacity = 0; // pas visible en mode auto
   }
