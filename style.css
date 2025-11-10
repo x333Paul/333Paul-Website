@@ -119,3 +119,38 @@ body {
 .cursor-ignore {
   cursor: auto !important;
 }
+
+.GifWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* on ne fixe plus la taille */
+  height: auto;
+  width: auto;
+}
+
+.Container {
+  position: relative;
+  display: inline-flex; /* ← permet de hug-content autour de l'image active */
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: auto;
+}
+
+.slideshow-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  height: 80vh; /* ← hauteur fixe */
+  width: auto;  /* ← largeur auto selon ratio */
+  object-fit: contain;
+}
+
+.slideshow-img.active {
+  position: relative;
+  opacity: 1;
+  z-index: 2;
+}
