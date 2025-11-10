@@ -166,9 +166,8 @@ document.body.addEventListener('click', (e) => {
 window.addEventListener('mousemove', (e) => {
   const cursor = document.getElementById('customCursor');
   const leftBox = document.querySelector('.Left');
-  const slideshow = document.getElementById('slideshow');
 
-  // Positionne le SVG au mouvement
+  // Position du SVG
   cursor.style.left = e.clientX + 'px';
   cursor.style.top = e.clientY + 'px';
 
@@ -180,21 +179,28 @@ window.addEventListener('mousemove', (e) => {
   }
 
   // Vérifie si la souris est sur une image du slideshow
-  const isOverImage = Array.from(slideshow.querySelectorAll('img')).some(img => img === e.target);
+  const isOverImage = Array.from(images).some(img => {
+    const rect = img.getBoundingClientRect();
+    return (
+      e.clientX >= rect.left &&
+      e.clientX <= rect.right &&
+      e.clientY >= rect.top &&
+      e.clientY <= rect.bottom
+    );
+  });
 
-  // Conditions :
+  // Vérifie si la souris est sur la colonne de texte
   const isOverLeft = leftBox.contains(e.target);
-  const shouldHide = isOverLeft || isOverImage;
 
-  if (shouldHide) {
-    cursor.style.opacity = 0;            // Masque le SVG
-    document.body.style.cursor = 'auto'; // Affiche le curseur normal
+  if (isOverImage || isOverLeft) {
+    cursor.style.opacity = 0;          // Masque le SVG
+    document.body.style.cursor = 'auto'; // Curseur normal
   } else {
-    cursor.style.opacity = 1;            // Montre le SVG
+    cursor.style.opacity = 1;          // Montre le SVG
     document.body.style.cursor = 'none'; // Cache le curseur normal
   }
 });
-  
+ 
 // --- Contrôles clavier ---
 window.addEventListener('keydown', (e) => {
   if (e.code === 'Space') {
