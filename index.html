@@ -172,6 +172,7 @@ function isDarkColor(color) {
   const g = parseInt(rgb[1], 10);
   const b = parseInt(rgb[2], 10);
 
+  // Calcul luminosité perçue
   const brightness = (r * 299 + g * 587 + b * 114) / 1000;
   return brightness < 128;
 }
@@ -181,14 +182,21 @@ window.addEventListener('mousemove', (e) => {
   cursor.style.top = e.clientY + 'px';
 
   if (document.body.dataset.mode === 'manual') {
+    // Curseur invisible si on survole :
+    // - le slideshow
+    // - un texte foncé
+    // - un lien interactif
+    // - le curseur lui-même
     const overSlideshow = slideshow.contains(e.target);
     const overDarkText = e.target !== cursor && isDarkColor(window.getComputedStyle(e.target).color);
+    const overLink = e.target.closest('a');
 
-    cursor.style.opacity = (overSlideshow || overDarkText) ? 0 : 1;
+    cursor.style.opacity = (overSlideshow || overDarkText || overLink) ? 0 : 1;
   } else {
-    cursor.style.opacity = 0;
+    cursor.style.opacity = 0; // invisible en mode auto
   }
 });
+
 
 
 
