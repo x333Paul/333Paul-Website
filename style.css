@@ -61,7 +61,6 @@ a:hover {
   transition: opacity 0.3s cubic-bezier(0.3, 0, 0.45, 1);
 }
 
-
 .GifWrapper {
   display: flex;
   align-items: center;
@@ -74,15 +73,6 @@ a:hover {
   flex-shrink: 0;
   position: relative;
 }
-
-.GifVideo {
-  width: 580px;
-  height: 580px;
-  object-fit: cover;
-  display: block;
-}
-
-
 
 .Footer {
   position: fixed;
@@ -141,10 +131,6 @@ a:hover {
     height: 480px;
   }
 
-  .GifVideo {
-    width: 480px;
-    height: 480px;
-  }
 
   .Left {
     font-size: 12px;
@@ -178,14 +164,6 @@ a:hover {
     margin-top: 50px;
   }
 
-  .GifVideo {
-    width: 100%;
-    height: auto;
-    max-height: 400px;
-    object-fit: contain;
-    margin-top: 50px;
-  }
-
   .Footer {
     font-size: 14px;
     margin: 15px 0;
@@ -213,12 +191,6 @@ a:hover {
 
   }
 
-  .GifVideo {
-    max-height: 300px;
-    margin: 0 auto;
-    display: block;
-    margin-top: 20px;
-  }
 }
 
 
