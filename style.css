@@ -1,4 +1,6 @@
-
+/* ==============================
+   RESET & FONT
+============================== */
 * {
   margin: 0;
   padding: 0;
@@ -25,7 +27,9 @@ body {
   justify-content: space-between;
 }
 
-
+/* ==============================
+   MAIN LAYOUT
+============================== */
 .Main {
   flex: 1;
   display: flex;
@@ -34,7 +38,6 @@ body {
   padding: 40px;
   position: relative;
 }
-
 
 .Left {
   display: flex;
@@ -74,6 +77,9 @@ a:hover {
   position: relative;
 }
 
+/* ==============================
+   FOOTER
+============================== */
 .Footer {
   position: fixed;
   bottom: 24px;
@@ -87,58 +93,101 @@ a:hover {
 }
 
 .FooterContent {
-  display: inline-block; /* permet de gérer l’espacement comme un bloc unique */
-  line-height: 1.2;      /* contrôle l’espace vertical entre les deux éléments */
+  display: inline-block;
+  line-height: 1.2;
   text-align: center;
-  margin: 0;
-  padding: 0;
 }
 
 #project-name,
 #copyright {
-  display: block;         /* empile les deux éléments */
-  margin: 0;              /* pas d’espace supplémentaire ajouté par défaut */
-  font-size: inherit;     /* récupère la taille de .Footer */
-  font-weight: 500;       /* ou 400 pour copyright */
+  display: block;
+  margin: 0;
+  font-size: inherit;
   transform: translateY(6px);
 }
-#copyright {
-  font-weight: 400;
-  opacity: 0.3;
+
+#project-name { font-weight: 500; }
+#copyright { font-weight: 400; opacity: 0.3; }
+
+/* ==============================
+   SLIDESHOW
+============================== */
+#slideshow {
+  position: relative;
+  width: 580px;
+  height: 580px;
+  overflow: hidden;
+  cursor: default;
 }
 
+/* --- Système d'images centrées et ratio respecté --- */
+.slideshow-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center center;
+  transition: transform 0.3s ease, opacity 0.4s ease;
 
-
-
-
+  width: auto;       /* permet de garder le ratio */
+  height: auto;      /* permet de garder le ratio */
+  max-width: 100%;
+  max-height: 100%;
+  opacity: 0;
 }
 
-/*≥1440px*/
+/* Échelles sémantiques */
+.slideshow-img--small { transform: translate(-50%, -50%) scale(0.7); }
+.slideshow-img--medium { transform: translate(-50%, -50%) scale(0.9); }
+.slideshow-img--large { transform: translate(-50%, -50%) scale(1); }
+.slideshow-img--xlarge { transform: translate(-50%, -50%) scale(1.2); }
+
+/* Active */
+.slideshow-img.active { opacity: 1; }
+
+/* ==============================
+   CURSEUR PERSONNALISÉ
+============================== */
+#customCursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  background: url('Assets/close.svg') no-repeat center center;
+  background-size: contain;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0s ease;
+  z-index: 9999;
+}
+
+body[data-mode="manual"] #customCursor {
+  opacity: 1;
+  cursor: none;
+}
+
+@media (max-width: 768px) {
+  #customCursor { display: none; }
+}
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+/* ≥1440px */
 @media (min-width: 1440px) {
-  .Left {
-    max-width: 400px;
-  }
+  .Left { max-width: 400px; }
 }
 
-/*≤1024px*/
+/* ≤1024px */
 @media (max-width: 1024px) {
-  .Main {
-    padding: 30px 20px;
-  }
-
-  .Container {
-    width: 480px;
-    height: 480px;
-  }
-
-
-  .Left {
-    font-size: 12px;
-    max-width: 280px;
-  }
+  .Main { padding: 30px 20px; }
+  .Container { width: 480px; height: 480px; }
+  .Left { font-size: 12px; max-width: 280px; }
 }
 
-/*≤768px*/
+/* ≤768px */
 @media (max-width: 768px) {
   .Main {
     flex-direction: column;
@@ -164,173 +213,12 @@ a:hover {
     margin-top: 50px;
   }
 
-  .Footer {
-    font-size: 14px;
-    margin: 15px 0;
-  }
+  .Footer { font-size: 14px; margin: 15px 0; }
 }
 
-/*≤400px*/
+/* ≤400px */
 @media (max-width: 400px) {
-  .Main {
-    padding: 10px;
-    align-items: center;
-  }
-
-  .GifWrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-
-  .Container {
-    max-width: 300px;
-    margin: 0 auto;
-    margin-top: 20px;
-
-  }
-
+  .Main { padding: 10px; align-items: center; }
+  .GifWrapper { width: 100%; display: flex; justify-content: center; margin-top: 20px; }
+  .Container { max-width: 300px; margin: 0 auto; margin-top: 20px; }
 }
-
-
-/* --- SLIDESHOW --- */
-#slideshow {
-  position: relative;
-  width: 580px;
-  height: 580px;
-  overflow: hidden;
-  cursor: default;
-}
-
-#slideshow img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-#slideshow img.active {
-  opacity: 1;
-}
-
-                        /* === Système de tailles sémantiques === */
-                        .slideshow-img {
-                          display: block;
-                          position: absolute;   /* on garde ton positionnement actuel */
-                          top: 50%;
-                          left: 50%;
-                          transform-origin: center center;
-                          transition: transform 0.3s ease, opacity 0.4s ease;
-                        }
-                        
-                        /* Échelles sémantiques */
-                        .slideshow-img--small {
-                          transform: translate(-50%, -50%) scale(0.7);
-                        }
-                        
-                        .slideshow-img--medium {
-                          transform: translate(-50%, -50%) scale(0.9);
-                        }
-                        
-                        .slideshow-img--large {
-                          transform: translate(-50%, -50%) scale(1);
-                        }
-                        
-                        .slideshow-img--xlarge {
-                          transform: translate(-50%, -50%) scale(1.2);
-                        }
-
-/* --- NOM DU PROJET --- */
-#project-name {
-  text-align: center;
-  font-size: 10px;
-  font-weight: 500;
-  color: #000;
-  margin-top: -10px;
-  margin-bottom: 10px;
-}
-
-/* --- CURSEUR PERSONNALISÉ --- */
-.cursor {
-  position: fixed;
-  width: 5px;
-  height: 5px;
-  background: url('Assets/close.svg') no-repeat center center / contain;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  z-index: 9999;
-  opacity: 0;
-  transition: opacity 0s ease-out;
-}
-
-body[data-mode="manual"] .cursor {
-  opacity: 1;
-}
-
-body[data-mode="manual"] {
-  cursor: none;
-}
-
-
-/* --- MOBILE --- */
-@media (max-width: 768px) {
-  .cursor { display: none; }
-}
-
-/* --- Slideshow --- */
-#slideshow {
-  position: relative;
-  width: 580px;
-  height: 580px;
-  overflow: hidden;
-}
-
-#slideshow img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 0.0s ease;
-}
-
-#slideshow img.active {
-  opacity: 1;
-}
-
-
-#customCursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 5px;
-  height: 5px;
-  background: url('Assets/close.svg') no-repeat center center;
-  background-size: contain;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  transition: opacity 0s ease;
-  z-index: 9999;
-}
-
-/* le curseur n’apparaît que quand on est en mode manuel */
-body[data-mode="manual"] #customCursor {
-  opacity: 1;
-  cursor: none;
-}
-
-/* Désactivation du curseur custom sur mobile */
-@media (max-width: 768px) {
-  #customCursor {
-    display: none;
-  }
-}
-
-
