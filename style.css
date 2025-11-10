@@ -1,156 +1,133 @@
-/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Général */
+@font-face {
+  font-family: 'ITC-AvantGarde';
+  src: url('Assets/ITC-AvantGarde.woff2') format('woff2'),
+       url('Assets/ITC-AvantGarde.woff') format('woff');
+}
+
 body {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  background-color: #f9f9f9;
-  color: #111;
-  overflow: hidden;
-  height: 100vh;
+  background-color: #F6F6F6;
+  font-family: "ITC-AvantGarde", sans-serif;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
   justify-content: space-between;
 }
 
-/* MAIN LAYOUT */
+/* Layout */
 .Main {
+  flex: 1;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   padding: 40px;
-  flex-grow: 1;
+  position: relative;
 }
 
-/* LEFT COLUMN */
 .Left {
-  width: 25%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  max-width: 300px;
+  font-size: clamp(10px, 0.7vw, 14px);
+  line-height: 120%;
+  color: #000;
 }
 
-.Left a {
-  color: #111;
+a {
+  color: inherit;
   text-decoration: none;
 }
 
-.Left a:hover {
-  text-decoration: underline;
+a:hover {
+  opacity: 0.3;
+  transition: opacity 0.3s cubic-bezier(0.3, 0, 0.45, 1);
 }
 
-/* SLIDESHOW WRAPPER */
+/* --- Slideshow container adaptatif --- */
 .GifWrapper {
-  flex-grow: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
   height: auto;
+  overflow: hidden;
 }
 
 .Container {
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: auto;
   width: auto;
+  height: auto;
+  position: relative;
 }
 
-/* IMAGES */
+/* --- Images : hauteur fixe, largeur dynamique --- */
 .slideshow-img {
   position: absolute;
-  top: 0;
-  left: 0;
-  height: 80vh; /* ← fixe la hauteur, s’adapte à la fenêtre */
-  width: auto;   /* ← largeur automatique */
-  opacity: 0;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+  transition: opacity 0.3s ease;
+  height: 80vh;
+  width: auto;
+  max-width: 100vw;
   object-fit: contain;
-  transition: opacity 0.4s ease;
+  opacity: 0;
 }
 
-.slideshow-img.active {
-  opacity: 1;
-  position: relative;
-  z-index: 2;
-}
+/* Scales sémantiques */
+.slideshow-img--small { transform: translate(-50%, -50%) scale(0.7); }
+.slideshow-img--medium { transform: translate(-50%, -50%) scale(0.9); }
+.slideshow-img--large { transform: translate(-50%, -50%) scale(1.0); }
+.slideshow-img--xlarge { transform: translate(-50%, -50%) scale(1.2); }
 
-/* FOOTER */
+.slideshow-img.active { opacity: 1; }
+
+/* --- Footer --- */
 .Footer {
-  width: 100%;
-  padding: 20px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  font-size: 14px;
-  line-height: 1;
-  border-top: 1px solid #111;
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: clamp(10px, 0.7vw, 14px);
 }
 
-#project-name {
-  font-weight: 500;
-}
+.FooterContent { line-height: 1.2; }
 
-#copyright {
-  opacity: 0.7;
-}
+#project-name { font-weight: 500; }
+#copyright { font-weight: 400; opacity: 0.3; transform: translateY(6px); }
 
-/* CURSEUR PERSONNALISÉ */
+/* --- Curseur custom --- */
 #customCursor {
   position: fixed;
   top: 0;
   left: 0;
-  width: 24px;
-  height: 24px;
+  width: 12px;
+  height: 12px;
+  background: url('Assets/close.svg') no-repeat center center;
+  background-size: contain;
   pointer-events: none;
+  transform: translate(-50%, -50%);
   opacity: 0;
   z-index: 9999;
-  transform: translate(-50%, -50%);
-  background: url('Assets/x.svg') center center no-repeat;
-  background-size: contain;
-  transition: opacity 0.15s ease;
 }
 
-/* Divers */
-.cursor-ignore {
-  cursor: auto !important;
-}
-
-.GifWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* on ne fixe plus la taille */
-  height: auto;
-  width: auto;
-}
-
-.Container {
-  position: relative;
-  display: inline-flex; /* ← permet de hug-content autour de l'image active */
-  justify-content: center;
-  align-items: center;
-  height: auto;
-  width: auto;
-}
-
-.slideshow-img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  height: 80vh; /* ← hauteur fixe */
-  width: auto;  /* ← largeur auto selon ratio */
-  object-fit: contain;
-}
-
-.slideshow-img.active {
-  position: relative;
+body[data-mode="manual"] #customCursor {
   opacity: 1;
-  z-index: 2;
+  cursor: none;
+}
+
+@media (max-width: 768px) {
+  #customCursor { display: none; }
+  .Main { flex-direction: column; padding: 20px; }
+  .Left { position: static; max-width: 100%; }
+  .Container img { height: 70vh; }
 }
