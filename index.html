@@ -149,20 +149,19 @@ document.body.addEventListener('click', (e) => {
 
 // --- CURSEUR PERSONNALISÉ ---
 window.addEventListener('mousemove', (e) => {
-  const cursorSize = 20; // Taille de ton SVG
+  const cursorSize = 20; // taille de ton X SVG
   cursor.style.left = e.clientX - cursorSize / 2 + 'px';
   cursor.style.top = e.clientY - cursorSize / 2 + 'px';
 
-  // Mode auto : pas de curseur
+  // mode auto : on n'affiche rien
   if (document.body.dataset.mode === 'auto') {
     cursor.style.opacity = 0;
     document.body.style.cursor = 'default';
     return;
   }
 
+  // vérifie si la souris est sur une image
   let isOverImage = false;
-
-  // Vérifie si la souris est sur une image visible
   images.forEach(img => {
     const rect = img.getBoundingClientRect();
     if (
@@ -175,15 +174,17 @@ window.addEventListener('mousemove', (e) => {
     }
   });
 
-  // Affiche le X si on n'est pas sur une image
   if (isOverImage) {
+    // curseur normal sur l'image
     cursor.style.opacity = 0;
     document.body.style.cursor = 'auto';
   } else {
+    // X SVG sur tout le reste
     cursor.style.opacity = 1;
     document.body.style.cursor = 'none';
   }
 });
+
 
 
 
