@@ -163,18 +163,30 @@ document.body.addEventListener('click', (e) => {
   if (!slideshow.contains(e.target)) startAuto();
 });
 
-// --- Curseur personnalisé ---
+// --- CURSEUR PERSONNALISÉ SVG ---
 window.addEventListener('mousemove', (e) => {
   cursor.style.left = e.clientX + 'px';
   cursor.style.top = e.clientY + 'px';
-  if (document.body.dataset.mode === 'manual') {
-    if (e.clientX < window.innerWidth / 3) cursor.textContent = '‹';
-    else if (e.clientX > (2 * window.innerWidth) / 3) cursor.textContent = '›';
-    else cursor.textContent = '×';
-  } else {
-    cursor.textContent = '×';
-  }
 });
+
+// Quand on passe en mode image par image
+function stopAuto() {
+  autoPlay = false;
+  document.body.dataset.mode = 'manual';
+  clearInterval(interval);
+}
+
+// Quand on revient au défilement auto (clic sur fond blanc)
+function startAuto() {
+  autoPlay = true;
+  document.body.dataset.mode = 'auto';
+  clearInterval(interval);
+  interval = setInterval(() => {
+    current = (current + 1) % images.length;
+    showImage(current);
+  }, 150);
+}
+
 
 // --- Initialisation ---
 showImage(current);
