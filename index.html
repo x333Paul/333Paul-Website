@@ -150,10 +150,12 @@ document.body.addEventListener('click', (e) => {
 // --- CURSEUR PERSONNALISÉ ---
 window.addEventListener('mousemove', (e) => {
   const leftBox = document.querySelector('.Left');
+  const container = document.getElementById('slideshow');
 
-  // Position du SVG
-  cursor.style.left = e.clientX + 'px';
-  cursor.style.top = e.clientY + 'px';
+  // Taille du curseur SVG
+  const cursorSize = 20; // ajuster selon ton SVG
+  cursor.style.left = e.clientX - cursorSize / 2 + 'px';
+  cursor.style.top = e.clientY - cursorSize / 2 + 'px';
 
   // Mode auto : pas de curseur
   if (document.body.dataset.mode === 'auto') {
@@ -165,9 +167,8 @@ window.addEventListener('mousemove', (e) => {
   // Curseur au-dessus du texte
   const isOverLeft = leftBox.contains(e.target);
 
-  // Curseur au-dessus d'une image
-  const elUnderCursor = document.elementFromPoint(e.clientX, e.clientY);
-  const isOverImage = elUnderCursor && elUnderCursor.tagName === 'IMG' && elUnderCursor.parentElement.id === 'slideshow';
+  // Curseur au-dessus des images
+  const isOverImage = container.contains(e.target);
 
   if (isOverLeft || isOverImage) {
     cursor.style.opacity = 0;
@@ -177,6 +178,7 @@ window.addEventListener('mousemove', (e) => {
     document.body.style.cursor = 'none';
   }
 });
+
 
 // --- Contrôles clavier ---
 window.addEventListener('keydown', (e) => {
