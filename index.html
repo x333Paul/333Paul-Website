@@ -164,19 +164,38 @@ document.body.addEventListener('click', (e) => {
 });
 
 // --- CURSEUR PERSONNALISÉ SVG ---
+function isDarkColor(color) {
+  // récupère la couleur en RGB
+  const rgb = color.match(/\d+/g); // ["r","g","b"]
+  if (!rgb) return false;
+
+  const r = parseInt(rgb[0], 10);
+  const g = parseInt(rgb[1], 10);
+  const b = parseInt(rgb[2], 10);
+
+  // calcule la luminosité perçue
+  const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+  return brightness < 128; // si sombre
+}
+
 window.addEventListener('mousemove', (e) => {
   cursor.style.left = e.clientX + 'px';
   cursor.style.top = e.clientY + 'px';
 
   if (document.body.dataset.mode === 'manual') {
-    // Curseur caché uniquement sur les éléments de texte et les liens
-    const overTextOrLink = e.target.closest('.Description, .Previously, .Link a, .Contact, a') || slideshow.contains(e.target);
+    const style = window.getComputedStyle(e.target);
+    const color = style.color;
 
-    cursor.style.opacity = overTextOrLink ? 0 : 1; // visible seulement sur le vrai fond
+    const overSlideshow = slideshow.contains(e.target);
+    const overDarkText = isDarkColor(color);
+
+    cursor.style.opacity = (overSlideshow || overDarkText) ? 0 : 1;
   } else {
-    cursor.style.opacity = 0; // pas visible en mode auto
+    cursor.style.opacity = 0;
   }
 });
+
+
 
 
 // Quand on passe en mode image par image
