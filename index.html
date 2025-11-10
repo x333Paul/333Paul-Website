@@ -21,78 +21,65 @@
   <meta name="twitter:title" content="333Paul – Freelance Graphic Designer" />
   <meta name="twitter:description" content="Paul is a Freelance graphic designer. He develops visual identities and narrative systems through a minimalist lens and a methodical approach." />
   <meta name="twitter:image" content="https://333paul.com/Assets/Preview.jpeg" />
-  
 </head>
 
-
-
-  
-
-
-  
 <body>
 <div class="Main">
 
-<div class="Left">
-  <div class="Description">
-    <span class="cursor-ignore">
-      Paul is a Freelance graphic designer. He develops visual identities and narrative systems through a minimalist lens and a methodical approach.
-    </span>
-    <br><br>
-  </div>
-
-  <div class="Previously">
-    <span class="cursor-ignore">Previously at</span>
-    <div class="Link">
-      <a href="https://feldman.studio" target="_blank" rel="noopener noreferrer" class="cursor-ignore">· Feldman (designer)</a><br>
-      <a href="https://www.antinomy.studio/" target="_blank" rel="noopener noreferrer" class="cursor-ignore">· Antinomy (intern)</a>
+  <div class="Left">
+    <div class="Description">
+      <span class="cursor-ignore">
+        Paul is a Freelance graphic designer. He develops visual identities and narrative systems through a minimalist lens and a methodical approach.
+      </span>
+      <br><br>
     </div>
-    <br>
+
+    <div class="Previously">
+      <span class="cursor-ignore">Previously at</span>
+      <div class="Link">
+        <a href="https://feldman.studio" target="_blank" rel="noopener noreferrer" class="cursor-ignore">· Feldman (designer)</a><br>
+        <a href="https://www.antinomy.studio/" target="_blank" rel="noopener noreferrer" class="cursor-ignore">· Antinomy (intern)</a>
+      </div>
+      <br>
+    </div>
+
+    <div class="Contact">
+      <span class="cursor-ignore">Reach out for full portfolio</span><br>
+      <a href="https://www.instagram.com/x333paul/" target="_blank" rel="noopener noreferrer" class="cursor-ignore">Instagram</a>,
+      <a href="https://www.are.na/paul/channels" target="_blank" rel="noopener noreferrer" class="cursor-ignore">Are.na</a><br>
+      <a href="#" onclick="copyEmail(this)" class="cursor-ignore">bonjour@333paul.com</a>
+
+      <script>
+        function copyEmail(element) {
+          const email = 'bonjour@333paul.com';
+          navigator.clipboard.writeText(email)
+            .then(() => {
+              element.textContent = 'E-mail copié !';
+              setTimeout(() => {
+                element.textContent = 'bonjour@333paul.com';
+              }, 2000);
+            });
+        }
+      </script>
+    </div>
   </div>
 
-  <div class="Contact">
-    <span class="cursor-ignore">Reach out for full portfolio</span><br>
-    <a href="https://www.instagram.com/x333paul/" target="_blank" rel="noopener noreferrer" class="cursor-ignore">Instagram</a>,
-    <a href="https://www.are.na/paul/channels" target="_blank" rel="noopener noreferrer" class="cursor-ignore">Are.na</a><br>
-    <a href="#" onclick="copyEmail(this)" class="cursor-ignore">bonjour@333paul.com</a>
-
-    <script>
-      function copyEmail(element) {
-        const email = 'bonjour@333paul.com';
-        navigator.clipboard.writeText(email)
-          .then(() => {
-            element.textContent = 'E-mail copié !';
-            setTimeout(() => {
-              element.textContent = 'Copier l\'email';
-            }, 2000);
-          });
-      }
-    </script>
+  <div class="GifWrapper">
+    <div class="Container" id="slideshow">
+      <img src="Assets/001.jpg" alt="Amsterdam" data-url="001" class="slideshow-img slideshow-img--small active">
+      <img src="Assets/002.jpg" alt="Feldman" data-url="002" class="slideshow-img slideshow-img--medium">
+      <img src="Assets/003.jpg" alt="Exclusible" data-url="003" class="slideshow-img slideshow-img--large">
+      <img src="Assets/004.jpg" alt="Feldman" data-url="004" class="slideshow-img slideshow-img--large">
+      <img src="Assets/005.jpg" alt="Hyacinthe" data-url="005" class="slideshow-img slideshow-img--medium">
+      <img src="Assets/006.jpg" alt="Exclusible" data-url="006" class="slideshow-img slideshow-img--medium">
+      <img src="Assets/007.jpg" alt="Feldman" data-url="007" class="slideshow-img slideshow-img--small">
+      <img src="Assets/008.jpg" alt="Hyacinthe" data-url="008" class="slideshow-img slideshow-img--medium">
+    </div>
   </div>
-</div>
 
-
-
-                                  <div class="GifWrapper">
-                                    <div class="Container" id="slideshow">
-                                      <img src="Assets/001.jpg" alt="Amsterdam" data-url="001" class="slideshow-img slideshow-img--small active">
-                                      <img src="Assets/002.jpg" alt="Feldman" data-url="002" class="slideshow-img slideshow-img--medium">
-                                      <img src="Assets/003.jpg" alt="Exclusible" data-url="003" class="slideshow-img slideshow-img--large">
-                                      <img src="Assets/004.jpg" alt="Feldman" data-url="004" class="slideshow-img slideshow-img--large">
-                                      <img src="Assets/005.jpg" alt="Hyacinthe" data-url="005" class="slideshow-img slideshow-img--medium">
-                                      <img src="Assets/006.jpg" alt="Exclusible" data-url="006" class="slideshow-img slideshow-img--medium">
-                                      <img src="Assets/007.jpg" alt="Feldman" data-url="007" class="slideshow-img slideshow-img--small">
-                                      <img src="Assets/008.jpg" alt="Hyacinthe" data-url="008" class="slideshow-img slideshow-img--medium">
-                                    </div>
-                                  </div>
-
-
-<div id="customCursor"></div>
+  <div id="customCursor"></div>
 
 </div>
-
-
-
 
 <div class="Footer">
   <div class="FooterContent">
@@ -100,8 +87,6 @@
     <div id="copyright">© 2025, 333Paul</div>
   </div>
 </div>
-
-
 
 <script>
 const slideshow = document.getElementById('slideshow');
@@ -164,43 +149,35 @@ document.body.addEventListener('click', (e) => {
 
 // --- CURSEUR PERSONNALISÉ ---
 window.addEventListener('mousemove', (e) => {
-  const cursor = document.getElementById('customCursor');
   const leftBox = document.querySelector('.Left');
 
   // Position du SVG
   cursor.style.left = e.clientX + 'px';
   cursor.style.top = e.clientY + 'px';
 
-  // Mode auto : pas de curseur custom
+  // Mode auto : pas de curseur
   if (document.body.dataset.mode === 'auto') {
     cursor.style.opacity = 0;
     document.body.style.cursor = 'default';
     return;
   }
 
-  // Vérifie si la souris est sur une image du slideshow
-  const isOverImage = Array.from(images).some(img => {
-    const rect = img.getBoundingClientRect();
-    return (
-      e.clientX >= rect.left &&
-      e.clientX <= rect.right &&
-      e.clientY >= rect.top &&
-      e.clientY <= rect.bottom
-    );
-  });
-
-  // Vérifie si la souris est sur la colonne de texte
+  // Curseur au-dessus du texte
   const isOverLeft = leftBox.contains(e.target);
 
-  if (isOverImage || isOverLeft) {
-    cursor.style.opacity = 0;          // Masque le SVG
-    document.body.style.cursor = 'auto'; // Curseur normal
+  // Curseur au-dessus d'une image
+  const elUnderCursor = document.elementFromPoint(e.clientX, e.clientY);
+  const isOverImage = elUnderCursor && elUnderCursor.tagName === 'IMG' && elUnderCursor.parentElement.id === 'slideshow';
+
+  if (isOverLeft || isOverImage) {
+    cursor.style.opacity = 0;
+    document.body.style.cursor = 'auto';
   } else {
-    cursor.style.opacity = 1;          // Montre le SVG
-    document.body.style.cursor = 'none'; // Cache le curseur normal
+    cursor.style.opacity = 1;
+    document.body.style.cursor = 'none';
   }
 });
- 
+
 // --- Contrôles clavier ---
 window.addEventListener('keydown', (e) => {
   if (e.code === 'Space') {
@@ -222,12 +199,7 @@ window.addEventListener('keydown', (e) => {
 // --- Initialisation ---
 showImage(current);
 startAuto();
- 
 </script>
 
-
-
-  
 </body>
-
 </html>
