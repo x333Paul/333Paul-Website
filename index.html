@@ -149,11 +149,7 @@ document.body.addEventListener('click', (e) => {
 
 // --- CURSEUR PERSONNALISÉ ---
 window.addEventListener('mousemove', (e) => {
-  const leftBox = document.querySelector('.Left');
-  const container = document.getElementById('slideshow');
-
-  // Taille du curseur SVG
-  const cursorSize = 20; // ajuster selon ton SVG
+  const cursorSize = 20; // Taille de ton SVG
   cursor.style.left = e.clientX - cursorSize / 2 + 'px';
   cursor.style.top = e.clientY - cursorSize / 2 + 'px';
 
@@ -164,13 +160,23 @@ window.addEventListener('mousemove', (e) => {
     return;
   }
 
-  // Curseur au-dessus du texte
-  const isOverLeft = leftBox.contains(e.target);
+  let isOverImage = false;
 
-  // Curseur au-dessus des images
-  const isOverImage = container.contains(e.target);
+  // Vérifie si la souris est sur une image visible
+  images.forEach(img => {
+    const rect = img.getBoundingClientRect();
+    if (
+      e.clientX >= rect.left &&
+      e.clientX <= rect.right &&
+      e.clientY >= rect.top &&
+      e.clientY <= rect.bottom
+    ) {
+      isOverImage = true;
+    }
+  });
 
-  if (isOverLeft || isOverImage) {
+  // Affiche le X si on n'est pas sur une image
+  if (isOverImage) {
     cursor.style.opacity = 0;
     document.body.style.cursor = 'auto';
   } else {
@@ -178,6 +184,7 @@ window.addEventListener('mousemove', (e) => {
     document.body.style.cursor = 'none';
   }
 });
+
 
 
 // --- Contrôles clavier ---
