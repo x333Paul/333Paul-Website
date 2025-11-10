@@ -114,7 +114,7 @@ a:hover {
 ============================== */
 #slideshow {
   position: relative;
-  width: 0px;
+  width: 580px;
   height: 580px;
   overflow: hidden;
   cursor: default;
@@ -126,7 +126,7 @@ a:hover {
   top: 50%;
   left: 50%;
   transform-origin: center center;
-  transition: transform 0.3s ease, opacity 0.4s ease;
+  transition: transform 0.0s ease, opacity 0.0s ease;
 
   width: auto;       /* permet de garder le ratio */
   height: auto;      /* permet de garder le ratio */
