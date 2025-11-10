@@ -258,19 +258,24 @@ a:hover {
 /* --- CURSEUR PERSONNALISÉ --- */
 .cursor {
   position: fixed;
+  width: 10px;
+  height: 10px;
+  background: url('Assets/close.svg') no-repeat center center / contain;
   pointer-events: none;
-  z-index: 1000;
-  font-size: 28px;
-  color: black;
-  opacity: 0;
-  transition: opacity 0.2s ease;
   transform: translate(-50%, -50%);
-  font-weight: 400;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.15s ease-out;
 }
 
 body[data-mode="manual"] .cursor {
   opacity: 1;
 }
+
+body[data-mode="manual"] {
+  cursor: none;
+}
+
 
 /* --- MOBILE --- */
 @media (max-width: 768px) {
