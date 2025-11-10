@@ -33,46 +33,44 @@
 <body>
 <div class="Main">
 
-
-
 <div class="Left">
-<div class="Description">
+  <div class="Description">
+    <span class="cursor-ignore">
+      Paul is a Freelance graphic designer. He develops visual identities and narrative systems through a minimalist lens and a methodical approach.
+    </span>
+    <br><br>
+  </div>
 
-  Paul is a Freelance graphic designer. He develops visual identities and narrative systems through a minimalist lens and a methodical approach.
-   <br>
- </div>
-<br>
- 
- <div class="Previously">
+  <div class="Previously">
+    <span class="cursor-ignore">Previously at</span>
+    <div class="Link">
+      <a href="https://feldman.studio" target="_blank" rel="noopener noreferrer" class="cursor-ignore">· Feldman (designer)</a><br>
+      <a href="https://www.antinomy.studio/" target="_blank" rel="noopener noreferrer" class="cursor-ignore">· Antinomy (intern)</a>
+    </div>
+    <br>
+  </div>
 
-  Previously at
-   <div class="Link">
-    <a href="https://feldman.studio"target="_blank" rel="noopener noreferrer">· Feldman (designer)</a> <br>
-    <a href="https://www.antinomy.studio/"target="_blank" rel="noopener noreferrer">· Antinomy (intern)</a>
-</div><br>
+  <div class="Contact">
+    <span class="cursor-ignore">Reach out for full portfolio</span><br>
+    <a href="https://www.instagram.com/x333paul/" target="_blank" rel="noopener noreferrer" class="cursor-ignore">Instagram</a>,
+    <a href="https://www.are.na/paul/channels" target="_blank" rel="noopener noreferrer" class="cursor-ignore">Are.na</a><br>
+    <a href="#" onclick="copyEmail(this)" class="cursor-ignore">bonjour@333paul.com</a>
+
+    <script>
+      function copyEmail(element) {
+        const email = 'bonjour@333paul.com';
+        navigator.clipboard.writeText(email)
+          .then(() => {
+            element.textContent = 'E-mail copié !';
+            setTimeout(() => {
+              element.textContent = 'Copier l\'email';
+            }, 2000);
+          });
+      }
+    </script>
+  </div>
 </div>
 
- <div class="Contact">
-
-Reach out for full portfolio <br>
- <a href="https://www.instagram.com/x333paul/"target="_blank" rel="noopener noreferrer">Instagram</a>,
- <a href="https://www.are.na/paul/channels"target="_blank" rel="noopener noreferrer">Are.na</a><br>
-<a href="#" onclick="copyEmail(this)">bonjour@333paul.com</a>
-
-<script>
-  function copyEmail(element) {
-    const email = 'bonjour@333paul.com';
-    navigator.clipboard.writeText(email)
-      .then(() => {
-        element.textContent = 'E-mail copié !';
-        setTimeout(() => {
-          element.textContent = 'Copier l\'email';
-        }, 2000);
-      });
-  }
-</script>
-</div>
-</div>
 
 
 <div class="GifWrapper">
@@ -237,7 +235,17 @@ window.addEventListener('keydown', (e) => {
     showImage(current);
   }
 });
- 
+
+document.addEventListener("mousemove", (e) => {
+  const cursor = document.querySelector(".custom-cursor");
+  const isOverIgnored = e.target.closest(".cursor-ignore");
+  cursor.style.opacity = isOverIgnored ? 0 : 1;
+});
+
+
+  
+
+  
 </script>
 
 
