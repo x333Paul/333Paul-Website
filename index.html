@@ -164,20 +164,32 @@ document.body.addEventListener('click', (e) => {
 
 // --- CURSEUR PERSONNALISÉ ---
 window.addEventListener('mousemove', (e) => {
+  const cursor = document.getElementById('customCursor');
+  const leftBox = document.querySelector('.Left');
+  const slideshow = document.getElementById('slideshow');
+
+  // Déplace le curseur SVG
   cursor.style.left = e.clientX + 'px';
   cursor.style.top = e.clientY + 'px';
 
-  // Curseur invisible :
-  // 1. si mode auto (défilement)
-  // 2. ou si sur texte / liens / mail / etc.
+  // Si on est en mode auto, le curseur SVG disparaît
   if (document.body.dataset.mode === 'auto') {
     cursor.style.opacity = 0;
-  } else {
-    const overTextOrLink = e.target.closest('.cursor-ignore, a, .Description, .Previously, .Contact');
-    cursor.style.opacity = overTextOrLink ? 0 : 1;
+    document.body.style.cursor = 'default';
+    return;
+  }
+
+  // Si on est dans la box gauche (texte)
+  if (leftBox.contains(e.target)) {
+    cursor.style.opacity = 0;                // le SVG disparaît
+    document.body.style.cursor = 'auto';     // le curseur normal revient
+  } 
+  // Sinon (fond / images)
+  else {
+    cursor.style.opacity = 1;                // SVG visible
+    document.body.style.cursor = 'none';     // masque le curseur classique
   }
 });
-
 // --- Contrôles clavier ---
 window.addEventListener('keydown', (e) => {
   if (e.code === 'Space') {
