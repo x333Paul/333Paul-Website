@@ -167,7 +167,20 @@ document.body.addEventListener('click', (e) => {
 window.addEventListener('mousemove', (e) => {
   cursor.style.left = e.clientX + 'px';
   cursor.style.top = e.clientY + 'px';
+
+  if (document.body.dataset.mode === 'manual') {
+    const isOverSlideshow = slideshow.contains(e.target);
+
+    if (!isOverSlideshow) {
+      cursor.style.opacity = 1; // visible seulement dans le fond
+    } else {
+      cursor.style.opacity = 0; // disparaît sur les images
+    }
+  } else {
+    cursor.style.opacity = 0; // pas visible en mode auto
+  }
 });
+
 
 // Quand on passe en mode image par image
 function stopAuto() {
