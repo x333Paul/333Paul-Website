@@ -102,10 +102,11 @@
 </div>
 
 
+
 <script>
 const slideshow = document.getElementById('slideshow');
 const images = slideshow.querySelectorAll('img');
-const projectName = document.getElementById('project-name'); // ✅ bon ID
+const projectName = document.getElementById('project-name');
 const cursor = document.getElementById('customCursor');
 
 let current = 0;
@@ -126,7 +127,7 @@ function showImage(index) {
   projectName.textContent = name;
 }
 
-// --- Démarre le défilement automatique ---
+// --- Défilement automatique ---
 function startAuto() {
   autoPlay = true;
   document.body.dataset.mode = 'auto';
@@ -144,7 +145,7 @@ function stopAuto() {
   clearInterval(interval);
 }
 
-// --- Gère le clic sur les images ---
+// --- Clic sur les images ---
 slideshow.addEventListener('click', (e) => {
   if (window.innerWidth <= 768) return;
   if (!autoPlay) {
@@ -155,113 +156,50 @@ slideshow.addEventListener('click', (e) => {
   }
 });
 
-// --- Gère le clic dans le blanc pour relancer ---
+// --- Clic dans le blanc pour relancer ---
 document.body.addEventListener('click', (e) => {
   if (autoPlay || window.innerWidth <= 768) return;
   if (!slideshow.contains(e.target)) startAuto();
 });
 
-// --- CURSEUR PERSONNALISÉ SVG ---
+// --- CURSEUR PERSONNALISÉ ---
 window.addEventListener('mousemove', (e) => {
   cursor.style.left = e.clientX + 'px';
   cursor.style.top = e.clientY + 'px';
 
-  if (document.body.dataset.mode === 'manual') {
-    // Curseur invisible si sur les images ou sur les éléments de texte précis
-    const overSlideshow = slideshow.contains(e.target);
-    const overTextOrLink = e.target.closest('.Description, .Previously, .Link a, .Contact');
-
-    cursor.style.opacity = (overSlideshow || overTextOrLink) ? 0 : 1;
+  // Curseur invisible :
+  // 1. si mode auto (défilement)
+  // 2. ou si sur texte / liens / mail / etc.
+  if (document.body.dataset.mode === 'auto') {
+    cursor.style.opacity = 0;
   } else {
-    cursor.style.opacity = 0; // invisible en mode auto
+    const overTextOrLink = e.target.closest('.cursor-ignore, a, .Description, .Previously, .Contact');
+    cursor.style.opacity = overTextOrLink ? 0 : 1;
   }
 });
 
-
-
-
-
-
-
-// Quand on passe en mode image par image
-function stopAuto() {
-  autoPlay = false;
-  document.body.dataset.mode = 'manual';
-  clearInterval(interval);
-}
-
-// Quand on revient au défilement auto (clic sur fond blanc)
-function startAuto() {
-  autoPlay = true;
-  document.body.dataset.mode = 'auto';
-  clearInterval(interval);
-  interval = setInterval(() => {
-    current = (current + 1) % images.length;
-    showImage(current);
-  }, 150);
-}
-
-
-// --- Initialisation ---
-showImage(current);
-startAuto();
-
-
- // --- Contrôles clavier ---
+// --- Contrôles clavier ---
 window.addEventListener('keydown', (e) => {
-  // Empêche la page de défiler quand on appuie sur espace
   if (e.code === 'Space') {
     e.preventDefault();
+    autoPlay ? stopAuto() : startAuto();
   }
 
-  // --- ESPACE : toggle auto <-> manuel ---
-  if (e.code === 'Space') {
-    if (autoPlay) {
-      stopAuto();
-    } else {
-      startAuto();
-    }
-  }
-
-  // --- Flèche droite : image suivante ---
   if (!autoPlay && e.code === 'ArrowRight') {
     current = (current + 1) % images.length;
     showImage(current);
   }
 
-  // --- Flèche gauche : image précédente ---
   if (!autoPlay && e.code === 'ArrowLeft') {
     current = (current - 1 + images.length) % images.length;
     showImage(current);
   }
 });
 
-document.addEventListener("mousemove", (e) => {
-  const cursor = document.querySelector(".custom-cursor");
-  const isOverIgnored = e.target.closest(".cursor-ignore");
-  cursor.style.opacity = isOverIgnored ? 0 : 1;
-});
-
-
-  const cursor = document.querySelector(".custom-cursor");
-
-  document.addEventListener("mousemove", (e) => {
-    const target = e.target;
-    const cursorStyle = getComputedStyle(target).cursor;
-
-    // Si l'élément a un curseur texte ou pointer, on masque
-    if (cursorStyle === "text" || cursorStyle === "pointer") {
-      cursor.style.opacity = 0;
-    } else {
-      cursor.style.opacity = 1;
-    }
-
-    // On suit le mouvement
-    cursor.style.left = e.clientX + "px";
-    cursor.style.top = e.clientY + "px";
-  });  
-
-  
+// --- Initialisation ---
+showImage(current);
+startAuto();
+ 
 </script>
 
 
