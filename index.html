@@ -168,28 +168,33 @@ window.addEventListener('mousemove', (e) => {
   const leftBox = document.querySelector('.Left');
   const slideshow = document.getElementById('slideshow');
 
-  // Déplace le curseur SVG
+  // Positionne le SVG au mouvement
   cursor.style.left = e.clientX + 'px';
   cursor.style.top = e.clientY + 'px';
 
-  // Si on est en mode auto, le curseur SVG disparaît
+  // Mode auto : pas de curseur custom
   if (document.body.dataset.mode === 'auto') {
     cursor.style.opacity = 0;
     document.body.style.cursor = 'default';
     return;
   }
 
-  // Si on est dans la box gauche (texte)
-  if (leftBox.contains(e.target)) {
-    cursor.style.opacity = 0;                // le SVG disparaît
-    document.body.style.cursor = 'auto';     // le curseur normal revient
-  } 
-  // Sinon (fond / images)
-  else {
-    cursor.style.opacity = 1;                // SVG visible
-    document.body.style.cursor = 'none';     // masque le curseur classique
+  // Vérifie si la souris est sur une image du slideshow
+  const isOverImage = Array.from(slideshow.querySelectorAll('img')).some(img => img === e.target);
+
+  // Conditions :
+  const isOverLeft = leftBox.contains(e.target);
+  const shouldHide = isOverLeft || isOverImage;
+
+  if (shouldHide) {
+    cursor.style.opacity = 0;            // Masque le SVG
+    document.body.style.cursor = 'auto'; // Affiche le curseur normal
+  } else {
+    cursor.style.opacity = 1;            // Montre le SVG
+    document.body.style.cursor = 'none'; // Cache le curseur normal
   }
 });
+  
 // --- Contrôles clavier ---
 window.addEventListener('keydown', (e) => {
   if (e.code === 'Space') {
