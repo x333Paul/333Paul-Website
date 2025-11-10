@@ -301,17 +301,25 @@ body[data-mode="manual"] .cursor {
 }
 
 
-/* --- Curseur personnalisé --- */
 #customCursor {
   position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  background: url('close.svg') no-repeat center center;
+  background-size: contain;
   pointer-events: none;
-  font-size: 18px;
-  font-weight: 600;
-  color: #000;
   transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
   z-index: 9999;
-  mix-blend-mode: difference;
-  transition: transform 0.1s ease;
+}
+
+/* le curseur n’apparaît que quand on est en mode manuel */
+body[data-mode="manual"] #customCursor {
+  opacity: 1;
+  cursor: none;
 }
 
 /* Désactivation du curseur custom sur mobile */
