@@ -54,7 +54,7 @@
           const email = 'bonjour@333paul.com';
           navigator.clipboard.writeText(email)
             .then(() => {
-              element.textContent = 'E-mail copié !';
+              element.textContent = 'email copied to clipboard';
               setTimeout(() => {
                 element.textContent = 'bonjour@333paul.com';
               }, 2000);
