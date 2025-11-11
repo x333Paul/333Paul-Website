@@ -1,4 +1,3 @@
-<script>
 const slideshow = document.getElementById('slideshow');
 let imagesArray = Array.from(slideshow.querySelectorAll('img'));
 
@@ -121,4 +120,3 @@ window.addEventListener('keydown', (e) => {
 // --- Initialisation ---
 showImage(current);
 startAuto();
-</script>
