@@ -206,11 +206,11 @@ body[data-mode="manual"] #customCursor {
   }
 
   .Container {
-    width: 100%;
-    max-width: 400px;
+    width: 80%;
+    max-width: 300px;
     height: auto;
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 20px;
   }
 
   .Footer { font-size: 14px; margin: 15px 0; }
