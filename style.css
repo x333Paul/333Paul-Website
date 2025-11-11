@@ -204,8 +204,9 @@ body[data-mode="manual"] #customCursor {
     padding: 0 10px;
     font-size: 14px;
   }
-
-  .Container {
+  .GifWrapper { width: 80%; display: flex; justify-content: center; margin-top: 0px; }
+  
+   .Container {
     width: 80%;
     max-width: 300px;
     height: auto;
