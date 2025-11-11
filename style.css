@@ -219,6 +219,6 @@ body[data-mode="manual"] #customCursor {
 /* ≤400px */
 @media (max-width: 400px) {
   .Main { padding: 10px; align-items: center; }
-  .GifWrapper { width: 50%; display: flex; justify-content: center; margin-top: 20px; }
-  .Container { max-width: 250px; margin: 0 auto; margin-top: 20px; }
+  .GifWrapper { width: 50%; display: flex; justify-content: center; margin-top: 0px; }
+  .Container { max-width: 250px; margin: 0 auto; margin-top: 0px; }
 }
