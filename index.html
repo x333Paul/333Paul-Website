@@ -6,185 +6,53 @@
   <title>333Paul</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="Assets/FAVICON.png">
-
-  <meta property="og:title" content="333Paul – Freelance Graphic Designer" />
-  <meta property="og:description" content="Paul is a Freelance graphic designer. He develops visual identities and narrative systems through a minimalist lens and a methodical approach." />
-  <meta property="og:url" content="https://333paul.com" />
-  <meta property="og:image" content="https://333paul.com/Assets/Preview.jpeg" />
-  <meta property="og:image:type" content="image/jpeg" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="333Paul – Freelance Graphic Designer" />
-  <meta name="twitter:description" content="Paul is a Freelance graphic designer. He develops visual identities and narrative systems through a minimalist lens and a methodical approach." />
-  <meta name="twitter:image" content="https://333paul.com/Assets/Preview.jpeg" />
 </head>
 
 <body>
-<div class="Main">
-
-  <div class="Left">
-    <div class="Description">
-      <span class="cursor-ignore">
-        Paul is a Freelance graphic designer. He develops visual identities and narrative systems through a minimalist lens and a methodical approach.
-      </span>
-      <br><br>
-    </div>
-
-    <div class="Previously">
-      <span class="cursor-ignore">Previously at</span>
-      <div class="Link">
-        <a href="https://feldman.studio" target="_blank" rel="noopener noreferrer" class="cursor-ignore">· Feldman (designer)</a><br>
-        <a href="https://www.antinomy.studio/" target="_blank" rel="noopener noreferrer" class="cursor-ignore">· Antinomy (intern)</a>
+  <div class="Main">
+    <div class="Left">
+      <div class="Description">
+        <span class="cursor-ignore">
+          Paul is a Freelance graphic designer. He develops visual identities and narrative systems through a minimalist lens and a methodical approach.
+        </span>
+        <br><br>
       </div>
-      <br>
+
+      <div class="Previously">
+        <span class="cursor-ignore">Previously at</span>
+        <div class="Link">
+          <a href="https://feldman.studio" target="_blank" rel="noopener noreferrer" class="cursor-ignore">· Feldman (designer)</a><br>
+          <a href="https://www.antinomy.studio/" target="_blank" rel="noopener noreferrer" class="cursor-ignore">· Antinomy (intern)</a>
+        </div>
+        <br>
+      </div>
+
+      <div class="Contact">
+        <span class="cursor-ignore">Reach out for full portfolio</span><br>
+        <a href="https://www.instagram.com/x333paul/" target="_blank" rel="noopener noreferrer" class="cursor-ignore">Instagram</a>,
+        <a href="https://www.are.na/paul/channels" target="_blank" rel="noopener noreferrer" class="cursor-ignore">Are.na</a><br>
+        <a href="#" onclick="copyEmail(this)" class="cursor-ignore">bonjour@333paul.com</a>
+      </div>
     </div>
 
-    <div class="Contact">
-      <span class="cursor-ignore">Reach out for full portfolio</span><br>
-      <a href="https://www.instagram.com/x333paul/" target="_blank" rel="noopener noreferrer" class="cursor-ignore">Instagram</a>,
-      <a href="https://www.are.na/paul/channels" target="_blank" rel="noopener noreferrer" class="cursor-ignore">Are.na</a><br>
-      <a href="#" onclick="copyEmail(this)" class="cursor-ignore">bonjour@333paul.com</a>
+    <div class="GifWrapper">
+      <div class="Container" id="slideshow">
+        <img src="Assets/001.jpg" alt="Strada Signature" data-url="001" class="slideshow-img active">
+        <img src="Assets/002.jpg" alt="Strada Website" data-url="002" class="slideshow-img">
+        <img src="Assets/003.jpg" alt="Curatr Labels" data-url="003" class="slideshow-img">
+      </div>
+    </div>
+
+    <div id="customCursor"></div>
+  </div>
+
+  <div class="Footer">
+    <div class="FooterContent">
+      <div id="project-name">Strada Signature</div>
+      <div id="copyright">© 2025, 333Paul</div>
     </div>
   </div>
 
-  <div class="GifWrapper">
-    <div class="Container" id="slideshow">
-      <img src="Assets/001.jpg" alt="Strada Signature" data-url="001" class="slideshow-img slideshow-img--small active">
-      <img src="Assets/002.jpg" alt="Strada Website" data-url="002" class="slideshow-img slideshow-img--medium">
-      <img src="Assets/003.jpg" alt="Curatr Labels" data-url="003" class="slideshow-img slideshow-img--large">
-    </div>
-  </div>
-
-  <div id="customCursor"></div>
-
-</div>
-
-<div class="Footer">
-  <div class="FooterContent">
-    <div id="project-name">Nom du projet</div>
-    <div id="copyright">© 2025, 333Paul</div>
-  </div>
-</div>
-
-<script>
-function copyEmail(element) {
-  const email = 'bonjour@333paul.com';
-  navigator.clipboard.writeText(email)
-    .then(() => {
-      element.textContent = 'E-mail copié !';
-      setTimeout(() => {
-        element.textContent = 'bonjour@333paul.com';
-      }, 2000);
-    });
-}
-
-// --- Slideshow ---
-const slideshow = document.getElementById('slideshow');
-let imagesArray = Array.from(slideshow.querySelectorAll('img'));
-
-function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-}
-imagesArray = shuffle(imagesArray);
-imagesArray.forEach(img => slideshow.appendChild(img));
-
-const projectName = document.getElementById('project-name');
-const cursor = document.getElementById('customCursor');
-
-let current = 0;
-let autoPlay = true;
-let interval;
-
-const path = window.location.pathname.replace('/', '');
-const initialIndex = imagesArray.findIndex(img => img.dataset.url === path);
-if (initialIndex >= 0) current = initialIndex;
-
-function showImage(index) {
-  imagesArray.forEach((img, i) => img.classList.toggle('active', i === index));
-  const url = imagesArray[index].dataset.url;
-  const name = imagesArray[index].alt;
-  history.replaceState(null, '', '/' + url);
-  projectName.textContent = name;
-}
-
-function startAuto() {
-  autoPlay = true;
-  document.body.dataset.mode = 'auto';
-  clearInterval(interval);
-  interval = setInterval(() => {
-    current = (current + 1) % imagesArray.length;
-    showImage(current);
-  }, 150);
-}
-
-function stopAuto() {
-  autoPlay = false;
-  document.body.dataset.mode = 'manual';
-  clearInterval(interval);
-}
-
-slideshow.addEventListener('click', (e) => {
-  if (window.innerWidth <= 768) return;
-  if (!autoPlay) {
-    current = (current + 1) % imagesArray.length;
-    showImage(current);
-  } else {
-    stopAuto();
-  }
-});
-
-document.body.addEventListener('click', (e) => {
-  if (autoPlay || window.innerWidth <= 768) return;
-  if (!slideshow.contains(e.target)) startAuto();
-});
-
-window.addEventListener('mousemove', (e) => {
-  const leftBox = document.querySelector('.Left');
-  cursor.style.left = e.clientX + 'px';
-  cursor.style.top = e.clientY + 'px';
-
-  if (document.body.dataset.mode === 'auto') {
-    cursor.style.opacity = 0;
-    document.body.style.cursor = 'default';
-    return;
-  }
-
-  const isOverLeft = leftBox.contains(e.target);
-  const elUnderCursor = document.elementFromPoint(e.clientX, e.clientY);
-  const isOverImage = elUnderCursor && elUnderCursor.tagName === 'IMG';
-
-  if (isOverLeft || isOverImage) {
-    cursor.style.opacity = 0;
-    document.body.style.cursor = 'auto';
-  } else {
-    cursor.style.opacity = 1;
-    document.body.style.cursor = 'none';
-  }
-});
-
-window.addEventListener('keydown', (e) => {
-  if (e.code === 'Space') {
-    e.preventDefault();
-    autoPlay ? stopAuto() : startAuto();
-  }
-  if (!autoPlay && e.code === 'ArrowRight') {
-    current = (current + 1) % imagesArray.length;
-    showImage(current);
-  }
-  if (!autoPlay && e.code === 'ArrowLeft') {
-    current = (current - 1 + imagesArray.length) % imagesArray.length;
-    showImage(current);
-  }
-});
-
-showImage(current);
-startAuto();
-</script>
+  <script src="script.js"></script>
 </body>
 </html>
