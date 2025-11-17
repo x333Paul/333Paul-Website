@@ -7,10 +7,7 @@
   <title>Portfolio – 333Paul</title>
   <meta name="description" content="Accédez au portfolio Figma de 333Paul." />
 
-  <!-- 🔁 Redirection immédiate -->
-  <meta http-equiv="refresh" content="0; url=https://www.figma.com/deck/O3eWB3BhNJ1gLyMVkcFhd0" />
-
-  <!-- 🪞 Open Graph (aperçu sur WhatsApp, etc.) -->
+  <!-- 🔗 Open Graph -->
   <meta property="og:title" content="333Paul – Portfolio" />
   <meta property="og:description" content="Découvrez le portfolio Figma de 333Paul, directeur artistique et designer graphique." />
   <meta property="og:url" content="https://333paul.com/portfolio" />
@@ -27,27 +24,26 @@
 
   <style>
     html, body {
-      height: 100%;
       margin: 0;
+      height: 100%;
+      overflow: hidden;
+      background: #000; /* fond noir pour Figma */
       font-family: system-ui, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #fff;
-      color: #111;
     }
-    a {
-      color: #111;
-      text-decoration: underline;
+
+    iframe {
+      width: 100vw;
+      height: 100vh;
+      border: none;
     }
   </style>
 </head>
 <body>
-  <p>
-    Redirection en cours…  
-    <a href="https://www.figma.com/deck/O3eWB3BhNJ1gLyMVkcFhd0" target="_blank" rel="noopener noreferrer">
-      Ouvrir le portfolio Figma
-    </a>
-  </p>
+
+  <iframe 
+    src="https://embed.figma.com/deck/O3eWB3BhNJ1gLyMVkcFhd0/P.-PORTFOLIO-WEB?node-id=58-1264&embed-host=333paul.com&footer=false" 
+    allowfullscreen
+  ></iframe>
+
 </body>
 </html>
