@@ -189,18 +189,11 @@ body[data-mode="manual"] #customCursor {
 
 /* ≤768px */
 @media (max-width: 768px) {
-
-   html, body {
-    overflow: hidden; /* bloque le scroll */
-    height: 100%;
-  }
-   .Main {
+  .Main {
     flex-direction: column;
     padding: 20px 15px;
     align-items: flex-start;
     justify-content: flex-start;
-    padding: 0;
-  }
   }
 
   .Left {
@@ -211,17 +204,7 @@ body[data-mode="manual"] #customCursor {
     padding: 0 10px;
     font-size: 14px;
   }
-  .GifWrapper { 
-     width: 80%; 
-     display: flex; 
-     justify-content: center; 
-     margin-top: 0px; 
-   position: fixed;
-    inset: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 1;
-  }
+  .GifWrapper { width: 80%; display: flex; justify-content: center; margin-top: 0px; }
   
    .Container {
     width: 80%;
@@ -231,37 +214,7 @@ body[data-mode="manual"] #customCursor {
     margin-top: 20px;
   }
 
- .Container,
-  #slideshow {
-    width: 100vw;
-    height: 100vh;
-  }
-
-.slideshow-img {
-    max-width: none;
-    max-height: none;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-  }
-
-/* état pause mobile */
-  body.mobile-paused .slideshow-img.active {
-    opacity: 0.3;
-    transition: opacity 0.2s ease;
-  }
-
-  /* texte au dessus */
-  .Left {
-    position: relative;
-    z-index: 10;
-  }
-
-  .Footer { 
-     font-size: 14px; 
-     margin: 15px 0; 
-      z-index: 10;
-  }
+  .Footer { font-size: 14px; margin: 15px 0; }
 }
 
 /* ≤500px */
