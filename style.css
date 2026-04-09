@@ -235,7 +235,7 @@ body[data-mode="manual"] #customCursor {
     justify-content: center;
   }
 
-  /* Images fullscreen centrées et agrandies par le centre */
+  /* Images fullscreen centrées - hauteur forcée à 100vh */
   .slideshow-img {
     opacity: 1 !important;
     transition: opacity 0.3s cubic-bezier(0.3, 0, 0.45, 1) !important;
@@ -243,8 +243,8 @@ body[data-mode="manual"] #customCursor {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    max-height: 100vh;
-    max-width: 100%;
+    height: 100vh;
+    width: auto;
     object-fit: contain;
   }
 
