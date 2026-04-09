@@ -120,3 +120,26 @@ window.addEventListener('keydown', (e) => {
 // --- Initialisation ---
 showImage(current);
 startAuto();
+
+
+// =============================
+// MOBILE TAP CONTROL
+// =============================
+let mobilePaused = false;
+
+function toggleMobile() {
+  if (window.innerWidth > 768) return;
+
+  if (!mobilePaused) {
+    stopAuto();
+    document.body.classList.add('mobile-paused');
+    mobilePaused = true;
+  } else {
+    startAuto();
+    document.body.classList.remove('mobile-paused');
+    mobilePaused = false;
+  }
+}
+
+// tap mobile
+slideshow.addEventListener('touchstart', toggleMobile);
