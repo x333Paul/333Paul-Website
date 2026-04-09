@@ -60,33 +60,11 @@ function stopAuto() {
   clearInterval(interval);
 }
 
-// --- Variables pour le comportement mobile ---
-let tapCount = 0;
-
 // --- Clic sur les images ---
 slideshow.addEventListener('click', (e) => {
   
-  // MOBILE (≤768px)
+  // MOBILE (≤768px) - désactivé pour scroll infini
   if (window.innerWidth <= 768) {
-    e.preventDefault();
-    
-    if (!isMobilePaused) {
-      // 1er TAP : pause le défilement et opacité 10%
-      stopAuto();
-      isMobilePaused = true;
-      tapCount = 1;
-      imagesArray[current].classList.add('mobile-paused');
-    } else if (tapCount === 1) {
-      // 2e TAP : opacité 100%
-      tapCount = 2;
-      imagesArray[current].classList.remove('mobile-paused');
-    } else if (tapCount === 2) {
-      // 3e TAP : image suivante et réappliquer l'opacité 10%
-      tapCount = 1;
-      current = (current + 1) % imagesArray.length;
-      showImage(current);
-      imagesArray[current].classList.add('mobile-paused');
-    }
     return;
   }
 
@@ -98,6 +76,34 @@ slideshow.addEventListener('click', (e) => {
     stopAuto();
   }
 });
+
+// --- Gestion du scroll infini sur mobile ---
+if (window.innerWidth <= 768) {
+  // Désactiver le défilement automatique sur mobile
+  autoPlay = false;
+  clearInterval(interval);
+  document.body.dataset.mode = 'manual';
+  
+  // Ajouter un comportement de scroll infini
+  let lastScrollPos = 0;
+  let scrollBuffer = imagesArray.length * 200; // Pixels par image (approximatif)
+  
+  window.addEventListener('scroll', () => {
+    const scrollPos = window.scrollY;
+    const maxScroll = document.body.scrollHeight - window.innerHeight;
+    
+    // Si on est à 80% du bas, dupliquer les images
+    if (scrollPos > maxScroll * 0.8) {
+      // Dupliquer les images sans modifier l'array original
+      const clonedImages = imagesArray.map(img => {
+        const clone = img.cloneNode(true);
+        clone.classList.remove('active', 'mobile-paused');
+        slideshow.appendChild(clone);
+        return clone;
+      });
+    }
+  });
+}
 
 // --- Clic en dehors pour relancer (desktop uniquement) ---
 document.body.addEventListener('click', (e) => {
