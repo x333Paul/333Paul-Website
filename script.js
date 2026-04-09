@@ -73,12 +73,16 @@ slideshow.addEventListener('click', (e) => {
     if (!isMobileDimmed) {
       // 1er TAP : réduire l'opacité à 30% pour lire la description
       isMobileDimmed = true;
-      // Réduire l'opacité de toutes les images
-      imagesArray.forEach(img => img.classList.add('mobile-dimmed'));
+      // Réduire l'opacité de toutes les images (y compris les clones)
+      slideshow.querySelectorAll('.slideshow-img').forEach(img => {
+        img.classList.add('mobile-dimmed');
+      });
     } else {
       // 2e TAP : revenir à 100% d'opacité
       isMobileDimmed = false;
-      imagesArray.forEach(img => img.classList.remove('mobile-dimmed'));
+      slideshow.querySelectorAll('.slideshow-img').forEach(img => {
+        img.classList.remove('mobile-dimmed');
+      });
     }
     return;
   }
