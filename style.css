@@ -250,6 +250,22 @@ body[data-mode="manual"] #customCursor {
     padding: 0;
   }
 
+  /* Vidéos - mêmes styles que les images */
+  video.slideshow-img {
+    opacity: 1 !important;
+    transition: opacity 0.3s cubic-bezier(0.3, 0, 0.45, 1) !important;
+    position: relative;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    transform: none !important;
+    top: auto !important;
+    left: auto !important;
+    margin: 0;
+    padding: 0;
+  }
+
   .slideshow-img:not(.active) {
     opacity: 1 !important;
   }
@@ -259,6 +275,10 @@ body[data-mode="manual"] #customCursor {
   }
 
   .slideshow-img.mobile-dimmed {
+    opacity: 0.3 !important;
+  }
+
+  video.slideshow-img.mobile-dimmed {
     opacity: 0.3 !important;
   }
 
