@@ -30,7 +30,17 @@ if (initialIndex >= 0) current = initialIndex;
 
 // --- Affiche l'image courante et le nom du projet ---
 function showImage(index) {
-  imagesArray.forEach((img, i) => img.classList.toggle('active', i === index));
+  imagesArray.forEach((elem, i) => {
+    elem.classList.toggle('active', i === index);
+    // Pour les vidéos, pausé si pas active, play si active
+    if (elem.tagName === 'VIDEO') {
+      if (i === index) {
+        elem.play();
+      } else {
+        elem.pause();
+      }
+    }
+  });
   const url = imagesArray[index].dataset.url;
   const name = imagesArray[index].alt;
   history.replaceState(null, '', '/' + url);
