@@ -1,5 +1,6 @@
 const slideshow = document.getElementById('slideshow');
-let imagesArray = Array.from(slideshow.querySelectorAll('img'));
+// Récupérer images ET vidéos
+let imagesArray = Array.from(slideshow.querySelectorAll('img, video'));
 
 // --- Mélange aléatoire des images ---
 function shuffle(array) {
@@ -121,14 +122,22 @@ if (window.innerWidth <= 768) {
     if (scrollPos > maxScroll * 0.7 && !isCloning) {
       isCloning = true;
       
-      // Dupliquer les images
-      imagesArray.forEach(img => {
-        const clone = img.cloneNode(true);
+      // Dupliquer les images et vidéos
+      imagesArray.forEach(elem => {
+        const clone = elem.cloneNode(true);
         clone.classList.remove('active', 'mobile-paused', 'mobile-dimmed');
+        
         // Si mobile-dimmed est actif, l'ajouter au clone aussi
         if (isMobileDimmed) {
           clone.classList.add('mobile-dimmed');
         }
+        
+        // Pour les vidéos, relancer l'autoplay
+        if (clone.tagName === 'VIDEO') {
+          clone.currentTime = 0;
+          clone.play();
+        }
+        
         slideshow.appendChild(clone);
       });
       
