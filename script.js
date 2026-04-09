@@ -99,6 +99,43 @@ document.body.addEventListener('click', (e) => {
   if (!slideshow.contains(e.target)) startAuto();
 });
 
+// --- Gestion du scroll infini sur mobile ---
+if (window.innerWidth <= 768) {
+  // Désactiver le défilement automatique sur mobile
+  autoPlay = false;
+  clearInterval(interval);
+  document.body.dataset.mode = 'manual';
+  
+  // Variables pour le scroll infini
+  let isCloning = false;
+  
+  window.addEventListener('scroll', () => {
+    const scrollPos = window.scrollY;
+    const maxScroll = document.body.scrollHeight - window.innerHeight;
+    
+    // Si on est à 70% du bas et pas déjà en train de cloner
+    if (scrollPos > maxScroll * 0.7 && !isCloning) {
+      isCloning = true;
+      
+      // Dupliquer les images
+      imagesArray.forEach(img => {
+        const clone = img.cloneNode(true);
+        clone.classList.remove('active', 'mobile-paused', 'mobile-dimmed');
+        // Si mobile-dimmed est actif, l'ajouter au clone aussi
+        if (isMobileDimmed) {
+          clone.classList.add('mobile-dimmed');
+        }
+        slideshow.appendChild(clone);
+      });
+      
+      // Reset le flag après un délai
+      setTimeout(() => {
+        isCloning = false;
+      }, 500);
+    }
+  });
+}
+
 // --- CURSEUR PERSONNALISÉ ---
 window.addEventListener('mousemove', (e) => {
   const leftBox = document.querySelector('.Left');
