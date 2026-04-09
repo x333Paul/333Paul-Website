@@ -41,6 +41,7 @@ function startAuto() {
   autoPlay = true;
   document.body.dataset.mode = 'auto';
   isMobilePaused = false;
+  tapCount = 0;
   clearInterval(interval);
   
   // Enlever la classe mobile-paused de tous les éléments
@@ -59,6 +60,9 @@ function stopAuto() {
   clearInterval(interval);
 }
 
+// --- Variables pour le comportement mobile ---
+let tapCount = 0;
+
 // --- Clic sur les images ---
 slideshow.addEventListener('click', (e) => {
   
@@ -70,14 +74,18 @@ slideshow.addEventListener('click', (e) => {
       // 1er TAP : pause le défilement et opacité 10%
       stopAuto();
       isMobilePaused = true;
+      tapCount = 1;
       imagesArray[current].classList.add('mobile-paused');
-    } else {
-      // 2e TAP : repasse à 100% opacité et passe à l'image suivante
+    } else if (tapCount === 1) {
+      // 2e TAP : opacité 100%
+      tapCount = 2;
       imagesArray[current].classList.remove('mobile-paused');
+    } else if (tapCount === 2) {
+      // 3e TAP : image suivante et réappliquer l'opacité 10%
+      tapCount = 1;
       current = (current + 1) % imagesArray.length;
       showImage(current);
       imagesArray[current].classList.add('mobile-paused');
-      // Le défilement reste arrêté jusqu'au reload
     }
     return;
   }
