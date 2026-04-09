@@ -60,11 +60,26 @@ function stopAuto() {
   clearInterval(interval);
 }
 
+// --- Variables pour le comportement mobile ---
+let isMobileDimmed = false;
+
 // --- Clic sur les images ---
 slideshow.addEventListener('click', (e) => {
   
-  // MOBILE (≤768px) - désactivé pour scroll infini
+  // MOBILE (≤768px) - tap pour dimmer/undimmer
   if (window.innerWidth <= 768) {
+    e.preventDefault();
+    
+    if (!isMobileDimmed) {
+      // 1er TAP : réduire l'opacité à 30% pour lire la description
+      isMobileDimmed = true;
+      // Réduire l'opacité de toutes les images
+      imagesArray.forEach(img => img.classList.add('mobile-dimmed'));
+    } else {
+      // 2e TAP : revenir à 100% d'opacité
+      isMobileDimmed = false;
+      imagesArray.forEach(img => img.classList.remove('mobile-dimmed'));
+    }
     return;
   }
 
@@ -76,34 +91,6 @@ slideshow.addEventListener('click', (e) => {
     stopAuto();
   }
 });
-
-// --- Gestion du scroll infini sur mobile ---
-if (window.innerWidth <= 768) {
-  // Désactiver le défilement automatique sur mobile
-  autoPlay = false;
-  clearInterval(interval);
-  document.body.dataset.mode = 'manual';
-  
-  // Ajouter un comportement de scroll infini
-  let lastScrollPos = 0;
-  let scrollBuffer = imagesArray.length * 200; // Pixels par image (approximatif)
-  
-  window.addEventListener('scroll', () => {
-    const scrollPos = window.scrollY;
-    const maxScroll = document.body.scrollHeight - window.innerHeight;
-    
-    // Si on est à 80% du bas, dupliquer les images
-    if (scrollPos > maxScroll * 0.8) {
-      // Dupliquer les images sans modifier l'array original
-      const clonedImages = imagesArray.map(img => {
-        const clone = img.cloneNode(true);
-        clone.classList.remove('active', 'mobile-paused');
-        slideshow.appendChild(clone);
-        return clone;
-      });
-    }
-  });
-}
 
 // --- Clic en dehors pour relancer (desktop uniquement) ---
 document.body.addEventListener('click', (e) => {
