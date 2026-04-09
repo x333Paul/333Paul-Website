@@ -9,22 +9,25 @@ function shuffle(array) {
   }
   return array;
 }
+
 imagesArray = shuffle(imagesArray);
 imagesArray.forEach(img => slideshow.appendChild(img));
 
 const projectName = document.getElementById('project-name');
 const cursor = document.getElementById('customCursor');
-
 let current = 0;
 let autoPlay = true;
 let interval;
+
+// --- Variables pour le comportement mobile ---
+let isMobilePaused = false;
 
 // --- Récupère l'image correspondant à l'URL si disponible ---
 const path = window.location.pathname.replace('/', '');
 const initialIndex = imagesArray.findIndex(img => img.dataset.url === path);
 if (initialIndex >= 0) current = initialIndex;
 
-// --- Affiche l’image courante et le nom du projet ---
+// --- Affiche l'image courante et le nom du projet ---
 function showImage(index) {
   imagesArray.forEach((img, i) => img.classList.toggle('active', i === index));
   const url = imagesArray[index].dataset.url;
@@ -37,7 +40,12 @@ function showImage(index) {
 function startAuto() {
   autoPlay = true;
   document.body.dataset.mode = 'auto';
+  isMobilePaused = false;
   clearInterval(interval);
+  
+  // Enlever la classe mobile-paused de tous les éléments
+  imagesArray.forEach(img => img.classList.remove('mobile-paused'));
+  
   interval = setInterval(() => {
     current = (current + 1) % imagesArray.length;
     showImage(current);
@@ -53,7 +61,28 @@ function stopAuto() {
 
 // --- Clic sur les images ---
 slideshow.addEventListener('click', (e) => {
-  if (window.innerWidth <= 768) return;
+  
+  // MOBILE (≤768px)
+  if (window.innerWidth <= 768) {
+    e.preventDefault();
+    
+    if (!isMobilePaused) {
+      // 1er TAP : pause le défilement et opacité 10%
+      stopAuto();
+      isMobilePaused = true;
+      imagesArray[current].classList.add('mobile-paused');
+    } else {
+      // 2e TAP : repasse à 100% opacité et passe à l'image suivante
+      imagesArray[current].classList.remove('mobile-paused');
+      current = (current + 1) % imagesArray.length;
+      showImage(current);
+      imagesArray[current].classList.add('mobile-paused');
+      // Le défilement reste arrêté jusqu'au reload
+    }
+    return;
+  }
+
+  // DESKTOP (>768px) - comportement existant
   if (!autoPlay) {
     current = (current + 1) % imagesArray.length;
     showImage(current);
@@ -62,8 +91,9 @@ slideshow.addEventListener('click', (e) => {
   }
 });
 
-// --- Clic dans le blanc pour relancer ---
+// --- Clic en dehors pour relancer (desktop uniquement) ---
 document.body.addEventListener('click', (e) => {
+  if (window.innerWidth <= 768) return; // Ne pas relancer le défilement sur mobile
   if (autoPlay || window.innerWidth <= 768) return;
   if (!slideshow.contains(e.target)) startAuto();
 });
@@ -71,25 +101,25 @@ document.body.addEventListener('click', (e) => {
 // --- CURSEUR PERSONNALISÉ ---
 window.addEventListener('mousemove', (e) => {
   const leftBox = document.querySelector('.Left');
-
+  
   // Position du curseur
   cursor.style.left = e.clientX + 'px';
   cursor.style.top = e.clientY + 'px';
-
+  
   // Mode auto : pas de curseur
   if (document.body.dataset.mode === 'auto') {
     cursor.style.opacity = 0;
     document.body.style.cursor = 'default';
     return;
   }
-
+  
   // Curseur au-dessus du texte
   const isOverLeft = leftBox.contains(e.target);
-
+  
   // Curseur au-dessus d'une image
   const elUnderCursor = document.elementFromPoint(e.clientX, e.clientY);
   const isOverImage = elUnderCursor && elUnderCursor.tagName === 'IMG' && elUnderCursor.parentElement.id === 'slideshow';
-
+  
   if (isOverLeft || isOverImage) {
     cursor.style.opacity = 0;
     document.body.style.cursor = 'auto';
@@ -105,12 +135,10 @@ window.addEventListener('keydown', (e) => {
     e.preventDefault();
     autoPlay ? stopAuto() : startAuto();
   }
-
   if (!autoPlay && e.code === 'ArrowRight') {
     current = (current + 1) % imagesArray.length;
     showImage(current);
   }
-
   if (!autoPlay && e.code === 'ArrowLeft') {
     current = (current - 1 + imagesArray.length) % imagesArray.length;
     showImage(current);
