@@ -32,14 +32,6 @@ if (initialIndex >= 0) current = initialIndex;
 function showImage(index) {
   imagesArray.forEach((elem, i) => {
     elem.classList.toggle('active', i === index);
-    // Pour les vidéos, pausé si pas active, play si active
-    if (elem.tagName === 'VIDEO') {
-      if (i === index) {
-        elem.play();
-      } else {
-        elem.pause();
-      }
-    }
   });
   const currentElem = imagesArray[index];
   const url = currentElem.dataset.url;
