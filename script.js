@@ -23,10 +23,7 @@ let interval;
 // --- Variables pour le comportement mobile ---
 let isMobilePaused = false;
 
-// --- Récupère l'image correspondant à l'URL si disponible ---
-const path = window.location.pathname.replace('/', '');
-const initialIndex = imagesArray.findIndex(img => img.dataset.url === path);
-if (initialIndex >= 0) current = initialIndex;
+// --- Initialisation : start à l'image aléatoire (plus de recherche par URL) ---
 
 // --- Affiche l'image courante et le nom du projet ---
 function showImage(index) {
@@ -34,10 +31,8 @@ function showImage(index) {
     elem.classList.toggle('active', i === index);
   });
   const currentElem = imagesArray[index];
-  const url = currentElem.dataset.url;
   // Récupérer le nom : alt pour IMG, data-name pour VIDEO
   const name = currentElem.alt || currentElem.dataset.name || 'Projet';
-  history.replaceState(null, '', '/' + url);
   if (projectName) {
     projectName.textContent = name;
   }
