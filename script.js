@@ -41,11 +41,14 @@ function showImage(index) {
       }
     }
   });
-  const url = imagesArray[index].dataset.url;
-  const name = imagesArray[index].alt;
-  console.log('showImage:', { index, name, url, element: imagesArray[index].tagName });
+  const currentElem = imagesArray[index];
+  const url = currentElem.dataset.url;
+  // Récupérer le nom : alt pour IMG, data-name pour VIDEO
+  const name = currentElem.alt || currentElem.dataset.name || 'Projet';
   history.replaceState(null, '', '/' + url);
-  projectName.textContent = name;
+  if (projectName) {
+    projectName.textContent = name;
+  }
 }
 
 // --- Défilement automatique ---
