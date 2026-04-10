@@ -236,7 +236,8 @@ body[data-mode="manual"] #customCursor {
 
   /* Images empilées verticalement - hauteur variable, sans crop */
   .slideshow-img {
-    opacity: 1 !important;
+    opacity: 0;
+    animation: fadeInMobile 0.6s ease-in-out 0.5s forwards;
     transition: opacity 0.3s cubic-bezier(0.3, 0, 0.45, 1) !important;
     position: relative;
     width: 100%;
@@ -250,9 +251,20 @@ body[data-mode="manual"] #customCursor {
     padding: 0;
   }
 
+  /* Animation fade-in pour le chargement initial */
+  @keyframes fadeInMobile {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
   /* Vidéos - mêmes styles que les images */
   video.slideshow-img {
-    opacity: 1 !important;
+    opacity: 0;
+    animation: fadeInMobile 0.6s ease-in-out 0.5s forwards;
     transition: opacity 0.3s cubic-bezier(0.3, 0, 0.45, 1) !important;
     position: relative;
     width: 100%;
