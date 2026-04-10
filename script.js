@@ -43,6 +43,7 @@ function showImage(index) {
   });
   const url = imagesArray[index].dataset.url;
   const name = imagesArray[index].alt;
+  console.log('showImage:', { index, name, url, element: imagesArray[index].tagName });
   history.replaceState(null, '', '/' + url);
   projectName.textContent = name;
 }
